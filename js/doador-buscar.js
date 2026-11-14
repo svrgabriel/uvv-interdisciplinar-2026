@@ -29,6 +29,7 @@ function contem(texto, termo) {
 function mostrarCampanhas() {
   const termo = campoItem.value.trim();
   const cidade = campoCidade.value;
+  const causa = campoCausa.value;
   const campanhas = campanhasAtivas();
   const area = document.getElementById("resultado-campanhas");
   area.innerHTML = "";
@@ -36,6 +37,9 @@ function mostrarCampanhas() {
   for (let i = 0; i < campanhas.length; i++) {
     const campanha = campanhas[i];
     if (cidade !== "" && campanha.cidade !== cidade) {
+      continue;
+    }
+    if (causa !== "" && campanha.entidadeId !== 0 && buscarPorId(todasEntidades, campanha.entidadeId).causa !== causa) {
       continue;
     }
     if (termo !== "" && !contem(campanha.itens + " " + campanha.titulo + " " + campanha.tipo, termo)) {
