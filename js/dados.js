@@ -270,11 +270,19 @@ function entidadesAprovadas() {
 
 function campanhasAtivas() {
   const campanhas = pegarCampanhas();
+  const entidades = pegarEntidades();
   const ativas = [];
   for (let i = 0; i < campanhas.length; i++) {
-    if (campanhas[i].status === "ativa") {
-      ativas.push(campanhas[i]);
+    if (campanhas[i].status !== "ativa") {
+      continue;
     }
+    if (campanhas[i].entidadeId !== 0) {
+      const entidade = buscarPorId(entidades, campanhas[i].entidadeId);
+      if (entidade === null || entidade.status !== "aprovada") {
+        continue;
+      }
+    }
+    ativas.push(campanhas[i]);
   }
   return ativas;
 }
