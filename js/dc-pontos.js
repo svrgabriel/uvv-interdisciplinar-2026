@@ -7,6 +7,10 @@ preencherCidades("filtro-cidade", pontosColeta);
 const cidadeDaUrl = pegarParametro("cidade");
 if (cidadeDaUrl !== null) {
   filtroCidade.value = cidadeDaUrl;
+  if (filtroCidade.value !== cidadeDaUrl) {
+    filtroCidade.innerHTML += `<option value="${cidadeDaUrl}">${cidadeDaUrl}</option>`;
+    filtroCidade.value = cidadeDaUrl;
+  }
 }
 
 function mostrarPontos() {
