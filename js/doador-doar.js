@@ -12,12 +12,19 @@ const idDaUrl = pegarParametro("id");
 if (idDaUrl !== null) {
   selectEntidade.value = idDaUrl;
 }
+if (selectEntidade.value === "" && opcoesEntidades.length > 0) {
+  selectEntidade.value = opcoesEntidades[0].id;
+}
 
 campoData.min = dataDeHoje();
 campoData.value = dataDeHoje();
 
 function mostrarInfoEntidade() {
   const entidade = buscarPorId(opcoesEntidades, Number(selectEntidade.value));
+  if (entidade === null) {
+    document.getElementById("info-entidade").innerHTML = '<p class="vazio">Nenhuma entidade aprovada disponível para receber doações.</p>';
+    return;
+  }
   const necessidades = necessidadesDaEntidade(entidade.id);
   const sugestoes = document.getElementById("sugestoes");
   let itens = "";
