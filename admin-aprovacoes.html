@@ -11,28 +11,38 @@
 <body>
   <header class="topo">
     <div class="topo-conteudo">
-      <div class="topo-esquerda">
-        <button class="botao-voltar" onclick="history.back()" aria-label="Voltar para a página anterior">← Voltar</button>
-        <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
-      </div>
-      <button class="botao-menu" onclick="abrirMenu()" aria-label="Abrir menu">☰</button>
-      <nav id="menu" class="menu" aria-label="Menu principal">
+      <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      <input type="checkbox" id="abrir-menu" class="menu-check">
+      <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
+      <nav class="menu" aria-label="Menu principal">
         <a href="admin-aprovacoes.html" class="ativo">Aprovar entidades</a>
         <a href="admin-moderacao.html">Moderar campanhas</a>
         <a href="admin-relatorios.html">Relatórios</a>
         <span class="usuario" id="nome-usuario"></span>
-        <button class="botao-tema" onclick="trocarTema()" aria-label="Trocar tema claro ou escuro">☾</button>
-        <button class="botao-sair" onclick="sair()">Sair</button>
+        <a href="login.html" class="botao-sair">Sair</a>
       </nav>
     </div>
   </header>
 
   <main class="container">
     <section>
-      <h1>Aprovação de entidades</h1>
-      <p class="subtitulo">Analise os cadastros novos antes de eles aparecerem para os doadores.</p>
+      <h1>Aprovar entidades</h1>
+      <p class="subtitulo">Confira os cadastros novos antes de liberar a entidade no site.</p>
       <h2>Aguardando aprovação</h2>
-      <div id="lista-pendentes" class="grade"></div>
+      <div class="tabela-caixa">
+        <table>
+          <thead>
+            <tr>
+              <th>Entidade</th>
+              <th>Endereço</th>
+              <th>Chave Pix</th>
+              <th>História</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-pendentes"></tbody>
+        </table>
+      </div>
     </section>
 
     <section class="secao">
@@ -41,7 +51,7 @@
         <table>
           <thead>
             <tr>
-              <th>Nome</th>
+              <th>Entidade</th>
               <th>Causa</th>
               <th>Cidade</th>
               <th>Status</th>

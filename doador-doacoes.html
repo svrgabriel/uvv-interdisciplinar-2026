@@ -11,19 +11,16 @@
 <body>
   <header class="topo">
     <div class="topo-conteudo">
-      <div class="topo-esquerda">
-        <button class="botao-voltar" onclick="history.back()" aria-label="Voltar para a página anterior">← Voltar</button>
-        <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
-      </div>
-      <button class="botao-menu" onclick="abrirMenu()" aria-label="Abrir menu">☰</button>
-      <nav id="menu" class="menu" aria-label="Menu principal">
+      <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      <input type="checkbox" id="abrir-menu" class="menu-check">
+      <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
+      <nav class="menu" aria-label="Menu principal">
         <a href="doador-buscar.html">O que doar</a>
         <a href="doador-mapa.html">Mapa de coleta</a>
         <a href="doador-doar.html">Registrar doação</a>
         <a href="doador-doacoes.html" class="ativo">Minhas doações</a>
         <span class="usuario" id="nome-usuario"></span>
-        <button class="botao-tema" onclick="trocarTema()" aria-label="Trocar tema claro ou escuro">☾</button>
-        <button class="botao-sair" onclick="sair()">Sair</button>
+        <a href="login.html" class="botao-sair">Sair</a>
       </nav>
     </div>
   </header>
@@ -32,33 +29,23 @@
     <section>
       <h1>Minhas doações</h1>
       <p class="subtitulo">Acompanhe suas intenções de doação e veja quando a entidade confirmar o recebimento.</p>
-      <div class="numeros">
-        <div class="numero"><strong id="total">0</strong><span>doações registradas</span></div>
-        <div class="numero"><strong id="total-aguardando">0</strong><span>aguardando entrega</span></div>
-        <div class="numero"><strong id="total-recebidas">0</strong><span>recebidas</span></div>
-        <div class="numero"><strong id="total-canceladas">0</strong><span>canceladas</span></div>
-      </div>
-    </section>
-
-    <section class="secao">
       <div class="tabela-caixa">
         <table>
-          <caption class="texto-suave">Histórico de doações</caption>
           <thead>
             <tr>
               <th>Data</th>
               <th>Entidade</th>
               <th>Item</th>
               <th>Quantidade</th>
-              <th>Forma</th>
+              <th>Entrega</th>
               <th>Status</th>
-              <th>Ação</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody id="tabela-doacoes"></tbody>
         </table>
       </div>
-      <p><a href="doador-doar.html" class="botao secao">Registrar nova doação</a></p>
+      <p class="secao"><a href="doador-doar.html" class="botao">Registrar nova doação</a></p>
     </section>
   </main>
 

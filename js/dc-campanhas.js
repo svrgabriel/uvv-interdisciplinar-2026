@@ -1,76 +1,12 @@
 const usuario = protegerPagina("defesacivil");
 const formEmergencia = document.getElementById("form-emergencia");
-const campoId = document.getElementById("id-campanha");
-const camposCampanha = ["titulo", "tipo", "nivel", "cidade", "itens", "descricao"];
+const tabela = document.getElementById("tabela-emergencias");
 
-function limparFormulario() {
-  formEmergencia.reset();
-  campoId.value = "";
-  document.getElementById("titulo-form").textContent = "Nova campanha emergencial";
-  document.getElementById("botao-salvar").textContent = "Abrir campanha";
-  document.getElementById("botao-cancelar").hidden = true;
-}
-
-function listarEmergencias() {
+function mudarCampanha(id, status) {
   const campanhas = pegarCampanhas();
-  const area = document.getElementById("lista-emergencias");
-  area.innerHTML = "";
-
-  for (let i = campanhas.length - 1; i >= 0; i--) {
-    const campanha = campanhas[i];
-    if (campanha.entidadeId !== 0) {
-      continue;
-    }
-    let botaoStatus = `<button class="botao botao-contorno botao-pequeno" onclick="trocarStatus(${campanha.id})">Encerrar</button>`;
-    if (campanha.status !== "ativa") {
-      botaoStatus = `<button class="botao botao-contorno botao-pequeno" onclick="trocarStatus(${campanha.id})">Reabrir</button>`;
-    }
-    area.innerHTML += `
-      <article class="cartao">
-        <div class="cartao-topo">
-          <h3 class="cartao-titulo">${campanha.titulo}</h3>
-          ${seloStatus(campanha.status)}
-        </div>
-        <p class="texto-suave">${campanha.tipo} · ${campanha.cidade} · ${seloNivel(campanha.nivel)}</p>
-        <p>${campanha.descricao}</p>
-        <p class="texto-suave"><strong>Precisa de:</strong> ${campanha.itens}</p>
-        <div class="cartao-botoes">
-          <button class="botao botao-pequeno" onclick="editarCampanha(${campanha.id})">Editar</button>
-          ${botaoStatus}
-          <button class="botao botao-perigo botao-pequeno" onclick="excluirCampanha(${campanha.id})">Excluir</button>
-        </div>
-      </article>
-    `;
-  }
-
-  if (area.innerHTML === "") {
-    area.innerHTML = '<p class="vazio">Nenhuma campanha emergencial aberta.</p>';
-  }
-}
-
-function editarCampanha(id) {
-  const campanha = buscarPorId(pegarCampanhas(), id);
-  campoId.value = campanha.id;
-  for (let i = 0; i < camposCampanha.length; i++) {
-    document.getElementById(camposCampanha[i]).value = campanha[camposCampanha[i]];
-  }
-  document.getElementById("titulo-form").textContent = "Editar campanha";
-  document.getElementById("botao-salvar").textContent = "Salvar alterações";
-  document.getElementById("botao-cancelar").hidden = false;
-  document.getElementById("mensagem-emergencia").textContent = "";
-  window.scrollTo(0, 0);
-}
-
-function trocarStatus(id) {
-  const campanhas = pegarCampanhas();
-  const campanha = buscarPorId(campanhas, id);
-  if (campanha.status === "ativa") {
-    campanha.status = "encerrada";
-  } else {
-    campanha.status = "ativa";
-  }
+  buscarPorId(campanhas, id).status = status;
   salvar("campanhas", campanhas);
-  listarEmergencias();
+  window.location.href = "dc-campanhas.html";
 }
 
 function excluirCampanha(id) {
@@ -78,42 +14,69 @@ function excluirCampanha(id) {
     return;
   }
   const campanhas = pegarCampanhas();
-  const novaLista = [];
+  const restantes = [];
   for (let i = 0; i < campanhas.length; i++) {
     if (campanhas[i].id !== id) {
-      novaLista.push(campanhas[i]);
+      restantes.push(campanhas[i]);
     }
   }
-  salvar("campanhas", novaLista);
-  limparFormulario();
-  listarEmergencias();
+  salvar("campanhas", restantes);
+  window.location.href = "dc-campanhas.html";
+}
+
+const minhas = [];
+const campanhas = pegarCampanhas();
+for (let i = campanhas.length - 1; i >= 0; i--) {
+  const campanha = campanhas[i];
+  if (campanha.entidadeId !== 0) {
+    continue;
+  }
+  minhas.push(campanha);
+  let botaoStatus = `<button class="botao botao-contorno botao-pequeno" onclick="mudarCampanha(${campanha.id}, 'encerrada')">Encerrar</button>`;
+  if (campanha.status !== "ativa") {
+    botaoStatus = `<button class="botao botao-contorno botao-pequeno" onclick="mudarCampanha(${campanha.id}, 'ativa')">Reabrir</button>`;
+  }
+  tabela.innerHTML += `
+    <tr>
+      <td><strong>${campanha.titulo}</strong><br><span class="texto-suave">${campanha.tipo} · ${campanha.cidade}</span></td>
+      <td>${seloNivel(campanha.nivel)}</td>
+      <td>${seloStatus(campanha.status)}</td>
+      <td>
+        <div class="acoes">
+          <a href="dc-campanhas.html?editar=${campanha.id}" class="botao botao-contorno botao-pequeno">Editar</a>
+          ${botaoStatus}
+          <button class="botao botao-perigo botao-pequeno" onclick="excluirCampanha(${campanha.id})">Excluir</button>
+        </div>
+      </td>
+    </tr>
+  `;
+}
+if (minhas.length === 0) {
+  tabela.innerHTML = '<tr><td colspan="4" class="vazio">Nenhuma campanha emergencial aberta.</td></tr>';
+}
+
+const campos = ["titulo", "tipo", "nivel", "cidade", "itens", "descricao"];
+const emEdicao = buscarPorId(minhas, Number(pegarParametro("editar")));
+if (emEdicao !== null) {
+  document.getElementById("titulo-form").textContent = "Editar campanha";
+  document.getElementById("id-campanha").value = emEdicao.id;
+  for (let i = 0; i < campos.length; i++) {
+    document.getElementById(campos[i]).value = emEdicao[campos[i]];
+  }
 }
 
 formEmergencia.addEventListener("submit", function (evento) {
   evento.preventDefault();
-  const campanhas = pegarCampanhas();
-  let campanha;
-
-  if (campoId.value === "") {
-    campanha = { id: novoId(campanhas), entidadeId: 0, status: "ativa" };
-    campanhas.push(campanha);
-    document.getElementById("mensagem-emergencia").textContent = "Campanha aberta e visível para os doadores!";
-  } else {
-    campanha = buscarPorId(campanhas, Number(campoId.value));
-    document.getElementById("mensagem-emergencia").textContent = "Campanha atualizada!";
+  const lista = pegarCampanhas();
+  const id = Number(document.getElementById("id-campanha").value);
+  let campanha = buscarPorId(lista, id);
+  if (campanha === null) {
+    campanha = { id: novoId(lista), entidadeId: 0, status: "ativa" };
+    lista.push(campanha);
   }
-
-  for (let i = 0; i < camposCampanha.length; i++) {
-    campanha[camposCampanha[i]] = document.getElementById(camposCampanha[i]).value.trim();
+  for (let i = 0; i < campos.length; i++) {
+    campanha[campos[i]] = document.getElementById(campos[i]).value.trim();
   }
-
-  salvar("campanhas", campanhas);
-  formEmergencia.reset();
-  campoId.value = "";
-  document.getElementById("titulo-form").textContent = "Nova campanha emergencial";
-  document.getElementById("botao-salvar").textContent = "Abrir campanha";
-  document.getElementById("botao-cancelar").hidden = true;
-  listarEmergencias();
+  salvar("campanhas", lista);
+  window.location.href = "dc-campanhas.html";
 });
-
-listarEmergencias();

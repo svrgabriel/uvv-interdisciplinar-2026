@@ -11,18 +11,15 @@
 <body>
   <header class="topo">
     <div class="topo-conteudo">
-      <div class="topo-esquerda">
-        <button class="botao-voltar" onclick="history.back()" aria-label="Voltar para a página anterior">← Voltar</button>
-        <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
-      </div>
-      <button class="botao-menu" onclick="abrirMenu()" aria-label="Abrir menu">☰</button>
-      <nav id="menu" class="menu" aria-label="Menu principal">
+      <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      <input type="checkbox" id="abrir-menu" class="menu-check">
+      <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
+      <nav class="menu" aria-label="Menu principal">
         <a href="admin-aprovacoes.html">Aprovar entidades</a>
         <a href="admin-moderacao.html">Moderar campanhas</a>
         <a href="admin-relatorios.html" class="ativo">Relatórios</a>
         <span class="usuario" id="nome-usuario"></span>
-        <button class="botao-tema" onclick="trocarTema()" aria-label="Trocar tema claro ou escuro">☾</button>
-        <button class="botao-sair" onclick="sair()">Sair</button>
+        <a href="login.html" class="botao-sair">Sair</a>
       </nav>
     </div>
   </header>
@@ -40,14 +37,32 @@
     </section>
 
     <section class="secao grade">
-      <article class="cartao">
+      <div>
         <h2>Necessidades por prioridade</h2>
-        <ul class="lista-necessidades" id="rel-prioridades"></ul>
-      </article>
-      <article class="cartao">
+        <div class="tabela-caixa">
+          <table>
+            <thead><tr><th>Prioridade</th><th>Quantidade</th></tr></thead>
+            <tbody>
+              <tr><td><span class="selo selo-urgente">Urgente</span></td><td id="rel-urgente">0</td></tr>
+              <tr><td><span class="selo selo-alta">Alta</span></td><td id="rel-alta">0</td></tr>
+              <tr><td><span class="selo selo-normal">Normal</span></td><td id="rel-normal">0</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
         <h2>Doações por status</h2>
-        <ul class="lista-necessidades" id="rel-status"></ul>
-      </article>
+        <div class="tabela-caixa">
+          <table>
+            <thead><tr><th>Status</th><th>Quantidade</th></tr></thead>
+            <tbody>
+              <tr><td><span class="selo selo-status-aguardando">Aguardando entrega</span></td><td id="rel-aguardando">0</td></tr>
+              <tr><td><span class="selo selo-status-recebida">Recebida</span></td><td id="rel-recebida">0</td></tr>
+              <tr><td><span class="selo selo-status-cancelada">Cancelada</span></td><td id="rel-cancelada">0</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </section>
 
     <section class="secao">

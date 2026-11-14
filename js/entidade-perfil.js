@@ -4,11 +4,9 @@ const campos = ["nome", "causa", "cidade", "cep", "endereco", "horario", "pix", 
 
 document.getElementById("link-publico").href = "instituicao.html?id=" + usuario.entidadeId;
 
-function preencherFormulario() {
-  const entidade = buscarPorId(pegarEntidades(), usuario.entidadeId);
-  for (let i = 0; i < campos.length; i++) {
-    document.getElementById(campos[i]).value = entidade[campos[i]];
-  }
+const minhaEntidade = buscarPorId(pegarEntidades(), usuario.entidadeId);
+for (let i = 0; i < campos.length; i++) {
+  document.getElementById(campos[i]).value = minhaEntidade[campos[i]];
 }
 
 formPerfil.addEventListener("submit", function (evento) {
@@ -25,5 +23,3 @@ formPerfil.addEventListener("submit", function (evento) {
   document.getElementById("nome-usuario").textContent = "Olá, " + entidade.nome;
   document.getElementById("mensagem-perfil").textContent = "Perfil salvo!";
 });
-
-preencherFormulario();

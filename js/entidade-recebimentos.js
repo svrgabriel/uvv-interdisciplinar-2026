@@ -1,75 +1,54 @@
 const usuario = protegerPagina("entidade");
+const tabela = document.getElementById("tabela-recebimentos");
 const formPresencial = document.getElementById("form-presencial");
 
 function confirmarRecebimento(id) {
   const doacoes = pegarDoacoes();
   buscarPorId(doacoes, id).status = "recebida";
   salvar("doacoes", doacoes);
-  listarDoacoes();
+  location.reload();
 }
 
-function listarDoacoes() {
-  const doacoes = pegarDoacoes();
-  const pendentes = document.getElementById("tabela-pendentes");
-  const recebidas = document.getElementById("tabela-recebidas");
-  pendentes.innerHTML = "";
-  recebidas.innerHTML = "";
-
-  for (let i = doacoes.length - 1; i >= 0; i--) {
-    const doacao = doacoes[i];
-    if (doacao.entidadeId !== usuario.entidadeId) {
-      continue;
-    }
-    if (doacao.status === "aguardando") {
-      pendentes.innerHTML += `
-        <tr>
-          <td>${formatarData(doacao.data)}</td>
-          <td>${doacao.doador}</td>
-          <td>${doacao.item}</td>
-          <td>${doacao.quantidade}</td>
-          <td>${doacao.forma}</td>
-          <td><button class="botao botao-pequeno" onclick="confirmarRecebimento(${doacao.id})">Confirmar recebimento</button></td>
-        </tr>
-      `;
-    } else if (doacao.status === "recebida") {
-      recebidas.innerHTML += `
-        <tr>
-          <td>${formatarData(doacao.data)}</td>
-          <td>${doacao.doador}</td>
-          <td>${doacao.item}</td>
-          <td>${doacao.quantidade}</td>
-          <td>${doacao.forma}</td>
-        </tr>
-      `;
-    }
+const doacoes = pegarDoacoes();
+for (let i = doacoes.length - 1; i >= 0; i--) {
+  const doacao = doacoes[i];
+  if (doacao.entidadeId !== usuario.entidadeId) {
+    continue;
   }
-
-  if (pendentes.innerHTML === "") {
-    pendentes.innerHTML = '<tr><td colspan="6" class="vazio">Nenhuma doação aguardando entrega.</td></tr>';
+  let acao = "-";
+  if (doacao.status === "aguardando") {
+    acao = `<button class="botao botao-pequeno" onclick="confirmarRecebimento(${doacao.id})">Confirmar recebimento</button>`;
   }
-  if (recebidas.innerHTML === "") {
-    recebidas.innerHTML = '<tr><td colspan="5" class="vazio">Nenhuma doação recebida ainda.</td></tr>';
-  }
+  tabela.innerHTML += `
+    <tr>
+      <td>${formatarData(doacao.data)}</td>
+      <td>${doacao.doador}</td>
+      <td>${doacao.item}</td>
+      <td>${doacao.quantidade}</td>
+      <td>${doacao.forma}</td>
+      <td>${seloStatus(doacao.status)}</td>
+      <td>${acao}</td>
+    </tr>
+  `;
+}
+if (tabela.innerHTML === "") {
+  tabela.innerHTML = '<tr><td colspan="7" class="vazio">Nenhuma doação registrada para sua entidade.</td></tr>';
 }
 
 formPresencial.addEventListener("submit", function (evento) {
   evento.preventDefault();
-  const doacoes = pegarDoacoes();
-  doacoes.push({
-    id: novoId(doacoes),
+  const lista = pegarDoacoes();
+  lista.push({
+    id: novoId(lista),
     usuario: "",
-    doador: document.getElementById("nome-doador").value.trim(),
+    doador: document.getElementById("doador").value.trim(),
     entidadeId: usuario.entidadeId,
-    item: document.getElementById("item-presencial").value.trim(),
-    quantidade: document.getElementById("quantidade-presencial").value.trim(),
-    forma: "Presencial",
+    item: document.getElementById("item").value.trim(),
+    quantidade: document.getElementById("quantidade").value.trim(),
+    forma: "Entregue no local",
     data: dataDeHoje(),
     status: "recebida"
   });
-  salvar("doacoes", doacoes);
-  formPresencial.reset();
-  document.getElementById("mensagem-presencial").textContent = "Doação presencial registrada!";
-  listarDoacoes();
+  salvar("doacoes", lista);
+  location.reload();
 });
-
-listarDoacoes();

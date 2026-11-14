@@ -11,17 +11,14 @@
 <body>
   <header class="topo">
     <div class="topo-conteudo">
-      <div class="topo-esquerda">
-        <button class="botao-voltar" onclick="history.back()" aria-label="Voltar para a página anterior">← Voltar</button>
-        <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
-      </div>
-      <button class="botao-menu" onclick="abrirMenu()" aria-label="Abrir menu">☰</button>
-      <nav id="menu" class="menu" aria-label="Menu principal">
+      <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      <input type="checkbox" id="abrir-menu" class="menu-check">
+      <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
+      <nav class="menu" aria-label="Menu principal">
         <a href="index.html">Início</a>
         <a href="index.html#como-funciona">Como funciona</a>
         <a href="cadastro.html" class="ativo">Cadastrar entidade</a>
-        <button class="botao-tema" onclick="trocarTema()" aria-label="Trocar tema claro ou escuro">☾</button>
-        <a href="login.html" id="link-entrar" class="botao botao-pequeno">Entrar</a>
+        <a href="login.html" class="botao botao-pequeno">Entrar</a>
       </nav>
     </div>
   </header>
@@ -34,43 +31,67 @@
         <div class="campos-linha">
           <div class="campo">
             <label for="nome">Nome da entidade</label>
-            <input type="text" id="nome" placeholder="Ex.: Casa do Caminho" required>
+            <input type="text" id="nome" placeholder="Ex.: Casa do Caminho" minlength="3" maxlength="60" required>
           </div>
           <div class="campo">
             <label for="causa">Causa</label>
-            <input type="text" id="causa" placeholder="Ex.: Abrigo infantil" required>
+            <select id="causa" required>
+              <option value="">Selecione</option>
+    <option value="Abrigo infantil">Abrigo infantil</option>
+    <option value="Acolhimento de desabrigados">Acolhimento de desabrigados</option>
+    <option value="Acolhimento de idosos">Acolhimento de idosos</option>
+    <option value="Apoio a famílias">Apoio a famílias</option>
+    <option value="Geração de renda">Geração de renda</option>
+    <option value="Proteção animal">Proteção animal</option>
+    <option value="Segurança alimentar">Segurança alimentar</option>
+    <option value="Outra">Outra</option>
+            </select>
           </div>
         </div>
         <div class="campos-linha">
           <div class="campo">
             <label for="cidade">Cidade</label>
-            <input type="text" id="cidade" placeholder="Ex.: Vila Velha" required>
+            <select id="cidade" required>
+              <option value="">Selecione</option>
+    <option value="Aracruz">Aracruz</option>
+    <option value="Cachoeiro de Itapemirim">Cachoeiro de Itapemirim</option>
+    <option value="Cariacica">Cariacica</option>
+    <option value="Colatina">Colatina</option>
+    <option value="Guarapari">Guarapari</option>
+    <option value="Linhares">Linhares</option>
+    <option value="São Mateus">São Mateus</option>
+    <option value="Serra">Serra</option>
+    <option value="Vila Velha">Vila Velha</option>
+    <option value="Vitória">Vitória</option>
+            </select>
           </div>
           <div class="campo">
             <label for="cep">CEP</label>
-            <input type="text" id="cep" placeholder="00000-000" maxlength="9">
+            <input type="text" id="cep" placeholder="00000-000" pattern="[0-9]{5}-?[0-9]{3}" title="Digite o CEP no formato 00000-000" required>
           </div>
         </div>
         <div class="campo">
           <label for="endereco">Endereço</label>
-          <input type="text" id="endereco" placeholder="Rua, número - bairro">
+          <input type="text" id="endereco" placeholder="Rua, número - bairro" required>
         </div>
         <div class="campos-linha">
           <div class="campo">
             <label for="horario">Dias e horário de entrega</label>
-            <input type="text" id="horario" placeholder="Ex.: Seg a Sex, 8h às 17h">
+            <input type="text" id="horario" placeholder="Ex.: Seg a Sex, 8h às 17h" required>
           </div>
           <div class="campo">
-            <label for="pix">Chave Pix</label>
+            <label for="pix">Chave Pix (opcional)</label>
             <input type="text" id="pix" placeholder="E-mail, CNPJ ou telefone">
           </div>
         </div>
         <div class="campo">
           <label for="historia">Nossa história</label>
-          <textarea id="historia" placeholder="Conte quem vocês são e quem vocês ajudam"></textarea>
+          <textarea id="historia" placeholder="Conte quem vocês são e quem vocês ajudam" maxlength="600" required></textarea>
         </div>
-        <p id="mensagem-cadastro" class="mensagem mensagem-sucesso" role="status"></p>
-        <button type="submit" class="botao">Enviar cadastro</button>
+        <div class="cartao-botoes">
+          <button type="submit" class="botao">Enviar cadastro</button>
+          <button type="reset" class="botao botao-contorno">Limpar</button>
+        </div>
       </form>
     </section>
   </main>

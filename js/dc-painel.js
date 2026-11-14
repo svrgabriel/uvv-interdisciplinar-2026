@@ -75,18 +75,12 @@ const lista = document.getElementById("lista-regioes");
 
 for (let i = 0; i < regioes.length; i++) {
   const regiao = regioes[i];
-  let classe = "regiao-normal";
   let selo = '<span class="selo selo-status-encerrada">Sem alerta</span>';
-  if (regiao.nivel === "Alto") {
-    classe = "regiao-alto";
-    totalAlto++;
-  } else if (regiao.nivel === "Médio") {
-    classe = "regiao-medio";
-  } else if (regiao.nivel === "Baixo") {
-    classe = "regiao-baixo";
-  }
   if (regiao.nivel !== "") {
     selo = seloNivel(regiao.nivel);
+  }
+  if (regiao.nivel === "Alto") {
+    totalAlto++;
   }
 
   let campanhasTexto = "Nenhuma";
@@ -95,18 +89,14 @@ for (let i = 0; i < regioes.length; i++) {
   }
 
   lista.innerHTML += `
-    <article class="cartao ${classe}">
-      <div class="cartao-topo">
-        <h3 class="cartao-titulo">${regiao.cidade}</h3>
-        ${selo}
-      </div>
-      <ul class="info-lista texto-suave">
-        <li><strong>Campanhas ativas:</strong> ${campanhasTexto}</li>
-        <li><strong>Pontos de coleta:</strong> ${regiao.entidades}</li>
-        <li><strong>Necessidades urgentes:</strong> ${regiao.urgentes}</li>
-      </ul>
-      <a href="dc-pontos.html?cidade=${regiao.cidade}" class="botao botao-contorno botao-pequeno">Ver pontos de coleta</a>
-    </article>
+    <tr>
+      <td><strong>${regiao.cidade}</strong></td>
+      <td>${selo}</td>
+      <td>${campanhasTexto}</td>
+      <td>${regiao.entidades}</td>
+      <td>${regiao.urgentes}</td>
+      <td><a href="dc-pontos.html?cidade=${encodeURIComponent(regiao.cidade)}" class="botao botao-contorno botao-pequeno">Ver pontos de coleta</a></td>
+    </tr>
   `;
 }
 

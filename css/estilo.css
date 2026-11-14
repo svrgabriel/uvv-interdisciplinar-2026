@@ -15,18 +15,20 @@
   --raio: 16px;
 }
 
-body.escuro {
-  --fundo: #121214;
-  --cartao: #1d1d20;
-  --texto: #ececec;
-  --texto-suave: #a3a3a3;
-  --borda: #333338;
-  --verde-claro: #14532d;
-  --vermelho-claro: #4c1d1d;
-  --amarelo-claro: #4a3410;
-  --vermelho: #fca5a5;
-  --amarelo: #fcd34d;
-  --cinza-claro: #2a2a2e;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fundo: #121214;
+    --cartao: #1d1d20;
+    --texto: #ececec;
+    --texto-suave: #a3a3a3;
+    --borda: #333338;
+    --verde-claro: #14532d;
+    --vermelho-claro: #4c1d1d;
+    --amarelo-claro: #4a3410;
+    --vermelho: #fca5a5;
+    --amarelo: #fcd34d;
+    --cinza-claro: #2a2a2e;
+  }
 }
 
 * {
@@ -79,27 +81,20 @@ img {
   flex-wrap: wrap;
 }
 
-.topo-esquerda {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
 .logo {
   font-size: 20px;
   font-weight: bold;
 }
 
-.botao-voltar {
-  background: none;
-  border: none;
-  color: var(--texto);
-  font-size: 14px;
-  cursor: pointer;
+.menu-check {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
 }
 
-.botao-voltar:hover {
-  color: var(--verde);
+.menu-check:focus-visible + .botao-menu {
+  outline: 2px solid var(--verde);
 }
 
 .botao-menu {
@@ -132,14 +127,6 @@ img {
 .usuario {
   font-size: 14px;
   color: var(--texto-suave);
-}
-
-.botao-tema {
-  background: none;
-  border: none;
-  color: var(--texto);
-  font-size: 18px;
-  cursor: pointer;
 }
 
 .botao-sair {
@@ -276,13 +263,14 @@ h3 {
 }
 
 .numeros {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 16px;
   margin-top: 40px;
 }
 
 .numero {
+  flex: 1 1 200px;
   background-color: var(--cartao);
   border: 1px solid var(--borda);
   border-radius: var(--raio);
@@ -304,12 +292,13 @@ h3 {
 
 .passos {
   list-style: none;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 16px;
 }
 
 .passo {
+  flex: 1 1 200px;
   background-color: var(--cartao);
   border: 1px solid var(--borda);
   border-radius: var(--raio);
@@ -332,17 +321,25 @@ h3 {
 }
 
 .grade {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 16px;
 }
 
-.grade-3 {
-  grid-template-columns: repeat(3, 1fr);
+.grade > * {
+  flex: 1 1 400px;
+}
+
+.grade-3 > * {
+  flex: 1 1 260px;
 }
 
 .grade-1 {
-  grid-template-columns: 1fr;
+  flex-direction: column;
+}
+
+.grade-1 > * {
+  flex: none;
 }
 
 .oculto-visual {
@@ -454,6 +451,10 @@ a.cartao-titulo:hover {
   gap: 12px;
   flex-wrap: wrap;
   margin-bottom: 24px;
+}
+
+.filtros button {
+  flex: none;
 }
 
 .filtros input,
@@ -583,18 +584,23 @@ tbody tr:last-child td {
   border-bottom: none;
 }
 
-.layout-duplo {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
+.layout-duplo,
+.perfil-topo {
+  display: flex;
+  flex-wrap: wrap;
   gap: 24px;
-  align-items: start;
+  align-items: flex-start;
 }
 
-.perfil-topo {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 24px;
-  align-items: start;
+.layout-duplo > :first-child,
+.perfil-topo > :last-child {
+  flex: 1 1 320px;
+}
+
+.layout-duplo > :last-child,
+.perfil-topo > :first-child {
+  flex: 1.5 1 420px;
+  min-width: 0;
 }
 
 .perfil-foto {
@@ -642,6 +648,12 @@ tbody tr:last-child td {
   margin-top: 12px;
 }
 
+.acoes {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
 .vazio {
   color: var(--texto-suave);
   font-size: 15px;
@@ -678,22 +690,6 @@ tbody tr:last-child td {
   }
 }
 
-@media (max-width: 900px) {
-  .numeros,
-  .passos {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .grade-3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .layout-duplo,
-  .perfil-topo {
-    grid-template-columns: 1fr;
-  }
-}
-
 @media (max-width: 768px) {
   .botao-menu {
     display: block;
@@ -708,13 +704,8 @@ tbody tr:last-child td {
     padding-bottom: 16px;
   }
 
-  .menu.aberto {
+  .menu-check:checked ~ .menu {
     display: flex;
-  }
-
-  .grade,
-  .grade-3 {
-    grid-template-columns: 1fr;
   }
 
   .campos-linha {
@@ -727,11 +718,6 @@ tbody tr:last-child td {
 }
 
 @media (max-width: 480px) {
-  .numeros,
-  .passos {
-    grid-template-columns: 1fr;
-  }
-
   .hero h1 {
     font-size: 36px;
   }

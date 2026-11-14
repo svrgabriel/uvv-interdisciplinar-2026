@@ -1,61 +1,34 @@
 const usuario = protegerPagina("doador");
-const pontos = entidadesAprovadas();
 const filtroCidade = document.getElementById("filtro-cidade");
+const tabela = document.getElementById("lista-pontos");
+const mapa = document.getElementById("mapa");
 
-preencherCidades("filtro-cidade", pontos);
+filtroCidade.value = pegarParametro("cidade") || "";
 
-const cidadeDaUrl = pegarParametro("cidade");
-if (cidadeDaUrl !== null) {
-  filtroCidade.value = cidadeDaUrl;
-  if (filtroCidade.value !== cidadeDaUrl) {
-    filtroCidade.innerHTML += `<option value="${cidadeDaUrl}">${cidadeDaUrl}</option>`;
-    filtroCidade.value = cidadeDaUrl;
+const pontos = entidadesAprovadas();
+for (let i = 0; i < pontos.length; i++) {
+  const entidade = pontos[i];
+  if (filtroCidade.value !== "" && entidade.cidade !== filtroCidade.value) {
+    continue;
   }
-}
 
-function verNoMapa(id) {
-  const entidade = buscarPorId(pontos, id);
-  document.getElementById("titulo-mapa").textContent = entidade.nome;
-  if (entidade.lat === null) {
-    document.getElementById("mapa").src = "";
-    return;
-  }
-  document.getElementById("mapa").src = linkMapa(entidade.lat, entidade.lng);
-}
-
-function mostrarPontos() {
-  const lista = document.getElementById("lista-pontos");
-  const cidade = filtroCidade.value;
-  lista.innerHTML = "";
-  let primeiro = 0;
-
-  for (let i = 0; i < pontos.length; i++) {
-    const entidade = pontos[i];
-    if (cidade !== "" && entidade.cidade !== cidade) {
-      continue;
+  let linkDoMapa = "Sem localização";
+  if (entidade.lat !== null) {
+    linkDoMapa = `<a href="${linkMapa(entidade.lat, entidade.lng)}" target="mapa" class="botao botao-contorno botao-pequeno">Ver no mapa</a>`;
+    if (mapa.src === "") {
+      mapa.src = linkMapa(entidade.lat, entidade.lng);
     }
-    if (primeiro === 0) {
-      primeiro = entidade.id;
-    }
-    lista.innerHTML += `
-      <li class="cartao">
-        <a href="instituicao.html?id=${entidade.id}" class="cartao-titulo">${entidade.nome}</a>
-        <p class="texto-suave">${entidade.endereco || "Endereço não informado"}</p>
-        <p class="texto-suave">${entidade.horario || "Horário não informado"}</p>
-        <div class="cartao-botoes">
-          <button class="botao botao-contorno botao-pequeno" onclick="verNoMapa(${entidade.id})">Ver no mapa</button>
-          <a href="doador-doar.html?id=${entidade.id}" class="botao botao-pequeno">Quero doar</a>
-        </div>
-      </li>
-    `;
   }
 
-  if (primeiro === 0) {
-    lista.innerHTML = '<li class="vazio">Nenhum ponto de coleta nessa cidade ainda.</li>';
-  } else {
-    verNoMapa(primeiro);
-  }
+  tabela.innerHTML += `
+    <tr>
+      <td><a href="instituicao.html?id=${entidade.id}" class="cartao-titulo">${entidade.nome}</a><br><span class="texto-suave">${entidade.cidade}</span></td>
+      <td>${entidade.endereco}<br><span class="texto-suave">${entidade.horario}</span></td>
+      <td>${linkDoMapa}</td>
+    </tr>
+  `;
 }
 
-filtroCidade.addEventListener("change", mostrarPontos);
-mostrarPontos();
+if (tabela.innerHTML === "") {
+  tabela.innerHTML = '<tr><td colspan="3" class="vazio">Nenhum ponto de coleta nessa cidade ainda.</td></tr>';
+}

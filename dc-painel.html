@@ -11,37 +11,48 @@
 <body>
   <header class="topo">
     <div class="topo-conteudo">
-      <div class="topo-esquerda">
-        <button class="botao-voltar" onclick="history.back()" aria-label="Voltar para a página anterior">← Voltar</button>
-        <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
-      </div>
-      <button class="botao-menu" onclick="abrirMenu()" aria-label="Abrir menu">☰</button>
-      <nav id="menu" class="menu" aria-label="Menu principal">
+      <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      <input type="checkbox" id="abrir-menu" class="menu-check">
+      <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
+      <nav class="menu" aria-label="Menu principal">
         <a href="dc-painel.html" class="ativo">Painel por região</a>
         <a href="dc-campanhas.html">Campanhas emergenciais</a>
         <a href="dc-pontos.html">Pontos de coleta</a>
         <span class="usuario" id="nome-usuario"></span>
-        <button class="botao-tema" onclick="trocarTema()" aria-label="Trocar tema claro ou escuro">☾</button>
-        <button class="botao-sair" onclick="sair()">Sair</button>
+        <a href="login.html" class="botao-sair">Sair</a>
       </nav>
     </div>
   </header>
 
   <main class="container">
     <section>
-      <h1>Painel de situação por região</h1>
-      <p class="subtitulo">Visão geral das campanhas emergenciais, entidades e necessidades urgentes em cada cidade.</p>
+      <h1>Painel por região</h1>
+      <p class="subtitulo">Situação de cada cidade, com campanhas ativas, pontos de coleta e necessidades urgentes.</p>
       <div class="numeros">
-        <div class="numero"><strong id="total-regioes">0</strong><span>regiões monitoradas</span></div>
-        <div class="numero"><strong id="total-alerta-alto">0</strong><span>regiões em alerta alto</span></div>
-        <div class="numero"><strong id="total-emergenciais">0</strong><span>campanhas emergenciais ativas</span></div>
+        <div class="numero"><strong id="total-regioes">0</strong><span>regiões acompanhadas</span></div>
+        <div class="numero"><strong id="total-alerta-alto">0</strong><span>em alerta alto</span></div>
+        <div class="numero"><strong id="total-emergenciais">0</strong><span>campanhas emergenciais</span></div>
         <div class="numero"><strong id="total-urgentes">0</strong><span>necessidades urgentes</span></div>
       </div>
     </section>
 
     <section class="secao">
       <h2>Regiões</h2>
-      <div id="lista-regioes" class="grade grade-3"></div>
+      <div class="tabela-caixa">
+        <table>
+          <thead>
+            <tr>
+              <th>Cidade</th>
+              <th>Alerta</th>
+              <th>Campanhas ativas</th>
+              <th>Pontos de coleta</th>
+              <th>Necessidades urgentes</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="lista-regioes"></tbody>
+        </table>
+      </div>
     </section>
   </main>
 

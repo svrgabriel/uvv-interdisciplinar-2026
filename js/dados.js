@@ -378,20 +378,6 @@ function pegarParametro(nome) {
   return parametros.get(nome);
 }
 
-function preencherCidades(idSelect, entidades) {
-  const select = document.getElementById(idSelect);
-  const cidades = [];
-  for (let i = 0; i < entidades.length; i++) {
-    if (cidades.indexOf(entidades[i].cidade) === -1) {
-      cidades.push(entidades[i].cidade);
-    }
-  }
-  cidades.sort();
-  for (let i = 0; i < cidades.length; i++) {
-    select.innerHTML += '<option value="' + cidades[i] + '">' + cidades[i] + "</option>";
-  }
-}
-
 function usuarioLogado() {
   const texto = localStorage.getItem("usuarioLogado");
   if (texto === null) {
@@ -404,42 +390,8 @@ function protegerPagina(perfil) {
   const usuario = usuarioLogado();
   if (usuario === null || usuario.perfil !== perfil) {
     window.location.href = "login.html";
+    return null;
   }
+  document.getElementById("nome-usuario").textContent = "Olá, " + usuario.nome;
   return usuario;
 }
-
-function sair() {
-  localStorage.removeItem("usuarioLogado");
-  window.location.href = "index.html";
-}
-
-function abrirMenu() {
-  document.getElementById("menu").classList.toggle("aberto");
-}
-
-function trocarTema() {
-  document.body.classList.toggle("escuro");
-  if (document.body.classList.contains("escuro")) {
-    localStorage.setItem("tema", "escuro");
-  } else {
-    localStorage.setItem("tema", "claro");
-  }
-}
-
-function iniciarPagina() {
-  if (localStorage.getItem("tema") === "escuro") {
-    document.body.classList.add("escuro");
-  }
-  const usuario = usuarioLogado();
-  const campoNome = document.getElementById("nome-usuario");
-  if (campoNome !== null && usuario !== null) {
-    campoNome.textContent = "Olá, " + usuario.nome;
-  }
-  const linkEntrar = document.getElementById("link-entrar");
-  if (linkEntrar !== null && usuario !== null) {
-    linkEntrar.textContent = "Meu painel";
-    linkEntrar.href = usuario.inicio;
-  }
-}
-
-iniciarPagina();

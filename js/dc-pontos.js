@@ -1,56 +1,35 @@
 const usuario = protegerPagina("defesacivil");
-const pontosColeta = entidadesAprovadas();
 const filtroCidade = document.getElementById("filtro-cidade");
+const tabela = document.getElementById("lista-pontos");
 
-preencherCidades("filtro-cidade", pontosColeta);
+filtroCidade.value = pegarParametro("cidade") || "";
 
-const cidadeDaUrl = pegarParametro("cidade");
-if (cidadeDaUrl !== null) {
-  filtroCidade.value = cidadeDaUrl;
-  if (filtroCidade.value !== cidadeDaUrl) {
-    filtroCidade.innerHTML += `<option value="${cidadeDaUrl}">${cidadeDaUrl}</option>`;
-    filtroCidade.value = cidadeDaUrl;
+const pontos = entidadesAprovadas();
+for (let i = 0; i < pontos.length; i++) {
+  const entidade = pontos[i];
+  if (filtroCidade.value !== "" && entidade.cidade !== filtroCidade.value) {
+    continue;
   }
+  const necessidades = necessidadesDaEntidade(entidade.id);
+  let urgentes = "";
+  for (let j = 0; j < necessidades.length; j++) {
+    if (necessidades[j].prioridade === "urgente") {
+      urgentes += `<li>${necessidades[j].item}</li>`;
+    }
+  }
+  if (urgentes === "") {
+    urgentes = '<li class="vazio">Nenhuma</li>';
+  }
+  tabela.innerHTML += `
+    <tr>
+      <td><a href="instituicao.html?id=${entidade.id}" class="cartao-titulo">${entidade.nome}</a><br><span class="texto-suave">${entidade.causa} · ${entidade.cidade}</span></td>
+      <td>${entidade.endereco}</td>
+      <td>${entidade.horario}</td>
+      <td><ul class="lista-necessidades">${urgentes}</ul></td>
+    </tr>
+  `;
 }
 
-function mostrarPontos() {
-  const area = document.getElementById("lista-pontos");
-  const cidade = filtroCidade.value;
-  area.innerHTML = "";
-
-  for (let i = 0; i < pontosColeta.length; i++) {
-    const entidade = pontosColeta[i];
-    if (cidade !== "" && entidade.cidade !== cidade) {
-      continue;
-    }
-    const necessidades = necessidadesDaEntidade(entidade.id);
-    let urgentes = "";
-    for (let j = 0; j < necessidades.length; j++) {
-      if (necessidades[j].prioridade === "urgente") {
-        urgentes += `<li><span>${necessidades[j].item}</span>${seloPrioridade("urgente")}</li>`;
-      }
-    }
-    if (urgentes === "") {
-      urgentes = '<li class="vazio">Nenhuma necessidade urgente.</li>';
-    }
-    area.innerHTML += `
-      <article class="cartao">
-        <a href="instituicao.html?id=${entidade.id}" class="cartao-titulo">${entidade.nome}</a>
-        <p class="texto-suave">${entidade.causa} · ${entidade.cidade}</p>
-        <ul class="info-lista texto-suave">
-          <li><strong>Endereço:</strong> ${entidade.endereco || "Não informado"}</li>
-          <li><strong>Horário:</strong> ${entidade.horario || "Não informado"}</li>
-        </ul>
-        <h3>Necessidades urgentes</h3>
-        <ul class="lista-necessidades">${urgentes}</ul>
-      </article>
-    `;
-  }
-
-  if (area.innerHTML === "") {
-    area.innerHTML = '<p class="vazio">Nenhum ponto de coleta cadastrado nessa cidade. Considere divulgar a campanha para entidades da região.</p>';
-  }
+if (tabela.innerHTML === "") {
+  tabela.innerHTML = '<tr><td colspan="4" class="vazio">Nenhum ponto de coleta cadastrado nessa cidade. Considere divulgar a campanha para entidades da região.</td></tr>';
 }
-
-filtroCidade.addEventListener("change", mostrarPontos);
-mostrarPontos();

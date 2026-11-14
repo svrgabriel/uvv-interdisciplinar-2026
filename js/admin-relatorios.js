@@ -28,17 +28,12 @@ document.getElementById("rel-pendentes").textContent = pendentes;
 document.getElementById("rel-campanhas").textContent = campanhasAtivas().length;
 document.getElementById("rel-doacoes").textContent = porStatus.recebida;
 
-document.getElementById("rel-prioridades").innerHTML = `
-  <li>${seloPrioridade("urgente")}<strong>${porPrioridade.urgente}</strong></li>
-  <li>${seloPrioridade("alta")}<strong>${porPrioridade.alta}</strong></li>
-  <li>${seloPrioridade("normal")}<strong>${porPrioridade.normal}</strong></li>
-`;
-
-document.getElementById("rel-status").innerHTML = `
-  <li>${seloStatus("aguardando")}<strong>${porStatus.aguardando}</strong></li>
-  <li>${seloStatus("recebida")}<strong>${porStatus.recebida}</strong></li>
-  <li>${seloStatus("cancelada")}<strong>${porStatus.cancelada}</strong></li>
-`;
+document.getElementById("rel-urgente").textContent = porPrioridade.urgente;
+document.getElementById("rel-alta").textContent = porPrioridade.alta;
+document.getElementById("rel-normal").textContent = porPrioridade.normal;
+document.getElementById("rel-aguardando").textContent = porStatus.aguardando;
+document.getElementById("rel-recebida").textContent = porStatus.recebida;
+document.getElementById("rel-cancelada").textContent = porStatus.cancelada;
 
 const tabela = document.getElementById("tabela-relatorio");
 for (let i = 0; i < entidadesRelatorio.length; i++) {

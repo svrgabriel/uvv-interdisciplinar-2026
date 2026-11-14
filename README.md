@@ -2,7 +2,7 @@
 
 Projeto do Desafio Interdisciplinar 2026 (Desenvolvimento de Software para Web - UVV).
 
-O DoeUVV conecta pessoas que querem doar a entidades e campanhas emergenciais que precisam de doações. Feito apenas com HTML, CSS e JavaScript puros. Os dados ficam salvos no `localStorage` do navegador.
+O DoeUVV conecta pessoas que querem doar a entidades e campanhas emergenciais que precisam de doações. Feito apenas com HTML, CSS e JavaScript puros. O HTML cuida da estrutura, das tabelas, dos formulários (com validação própria do HTML) e das buscas e filtros (formulários `method="get"`). O CSS cuida do layout com flexbox, do menu mobile e do tema escuro automático. O JavaScript só é usado para o login e para ler e salvar os dados no `localStorage` do navegador.
 
 ## Como abrir
 

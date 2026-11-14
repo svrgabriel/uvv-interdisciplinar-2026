@@ -11,41 +11,39 @@
 <body>
   <header class="topo">
     <div class="topo-conteudo">
-      <div class="topo-esquerda">
-        <button class="botao-voltar" onclick="history.back()" aria-label="Voltar para a página anterior">← Voltar</button>
-        <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
-      </div>
-      <button class="botao-menu" onclick="abrirMenu()" aria-label="Abrir menu">☰</button>
-      <nav id="menu" class="menu" aria-label="Menu principal">
+      <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      <input type="checkbox" id="abrir-menu" class="menu-check">
+      <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
+      <nav class="menu" aria-label="Menu principal">
         <a href="doador-buscar.html">O que doar</a>
         <a href="doador-mapa.html">Mapa de coleta</a>
         <a href="doador-doar.html" class="ativo">Registrar doação</a>
         <a href="doador-doacoes.html">Minhas doações</a>
         <span class="usuario" id="nome-usuario"></span>
-        <button class="botao-tema" onclick="trocarTema()" aria-label="Trocar tema claro ou escuro">☾</button>
-        <button class="botao-sair" onclick="sair()">Sair</button>
+        <a href="login.html" class="botao-sair">Sair</a>
       </nav>
     </div>
   </header>
 
   <main class="container">
     <section>
-      <h1>Registrar doação</h1>
-      <p class="subtitulo">Diga o que você vai doar e como pretende entregar. A entidade confirma quando receber.</p>
+      <h1>Registrar intenção de doação</h1>
+      <p class="subtitulo">Escolha a entidade, diga o que vai doar e como vai entregar.</p>
       <div class="layout-duplo">
         <form id="form-doacao" class="formulario">
           <div class="campo">
             <label for="entidade">Entidade</label>
             <select id="entidade" required></select>
           </div>
-          <div class="campo">
-            <label for="item">O que você vai doar</label>
-            <input type="text" id="item" list="sugestoes" placeholder="Ex.: Leite em pó" required>
-            <datalist id="sugestoes"></datalist>
-          </div>
-          <div class="campo">
-            <label for="quantidade">Quantidade</label>
-            <input type="text" id="quantidade" placeholder="Ex.: 5 pacotes" required>
+          <div class="campos-linha">
+            <div class="campo">
+              <label for="item">O que você vai doar</label>
+              <input type="text" id="item" placeholder="Ex.: Fraldas infantis" maxlength="60" required>
+            </div>
+            <div class="campo">
+              <label for="quantidade">Quantidade</label>
+              <input type="text" id="quantidade" placeholder="Ex.: 3 pacotes" maxlength="30" required>
+            </div>
           </div>
           <fieldset>
             <legend>Forma de entrega</legend>
@@ -57,10 +55,10 @@
             <label for="data">Data prevista</label>
             <input type="date" id="data" required>
           </div>
-          <p id="mensagem-doacao" class="mensagem mensagem-sucesso" role="status"></p>
+          <p id="mensagem-doacao" class="mensagem mensagem-erro" role="alert"></p>
           <button type="submit" class="botao">Registrar intenção de doação</button>
         </form>
-        <article class="cartao" id="info-entidade"></article>
+        <article id="info-entidade" class="cartao"></article>
       </div>
     </section>
   </main>

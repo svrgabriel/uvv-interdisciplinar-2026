@@ -1,3 +1,5 @@
+localStorage.removeItem("usuarioLogado");
+
 const formLogin = document.getElementById("form-login");
 
 formLogin.addEventListener("submit", function (evento) {

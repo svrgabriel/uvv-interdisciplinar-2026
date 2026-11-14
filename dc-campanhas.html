@@ -11,18 +11,15 @@
 <body>
   <header class="topo">
     <div class="topo-conteudo">
-      <div class="topo-esquerda">
-        <button class="botao-voltar" onclick="history.back()" aria-label="Voltar para a página anterior">← Voltar</button>
-        <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
-      </div>
-      <button class="botao-menu" onclick="abrirMenu()" aria-label="Abrir menu">☰</button>
-      <nav id="menu" class="menu" aria-label="Menu principal">
+      <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      <input type="checkbox" id="abrir-menu" class="menu-check">
+      <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
+      <nav class="menu" aria-label="Menu principal">
         <a href="dc-painel.html">Painel por região</a>
         <a href="dc-campanhas.html" class="ativo">Campanhas emergenciais</a>
         <a href="dc-pontos.html">Pontos de coleta</a>
         <span class="usuario" id="nome-usuario"></span>
-        <button class="botao-tema" onclick="trocarTema()" aria-label="Trocar tema claro ou escuro">☾</button>
-        <button class="botao-sair" onclick="sair()">Sair</button>
+        <a href="login.html" class="botao-sair">Sair</a>
       </nav>
     </div>
   </header>
@@ -37,22 +34,23 @@
           <input type="hidden" id="id-campanha">
           <div class="campo">
             <label for="titulo">Título</label>
-            <input type="text" id="titulo" placeholder="Ex.: SOS Enchente Cachoeiro" required>
+            <input type="text" id="titulo" placeholder="Ex.: SOS Enchente Cachoeiro" minlength="3" maxlength="60" required>
           </div>
           <div class="campos-linha">
             <div class="campo">
               <label for="tipo">Tipo de desastre</label>
-              <select id="tipo">
+              <select id="tipo" required>
                 <option>Enchente</option>
                 <option>Deslizamento</option>
                 <option>Seca</option>
                 <option>Incêndio</option>
                 <option>Vendaval</option>
+                <option>Outra emergência</option>
               </select>
             </div>
             <div class="campo">
               <label for="nivel">Nível de alerta</label>
-              <select id="nivel">
+              <select id="nivel" required>
                 <option>Alto</option>
                 <option>Médio</option>
                 <option>Baixo</option>
@@ -61,25 +59,48 @@
           </div>
           <div class="campo">
             <label for="cidade">Cidade / região</label>
-            <input type="text" id="cidade" required>
+            <select id="cidade" required>
+              <option value="">Selecione</option>
+    <option value="Aracruz">Aracruz</option>
+    <option value="Cachoeiro de Itapemirim">Cachoeiro de Itapemirim</option>
+    <option value="Cariacica">Cariacica</option>
+    <option value="Colatina">Colatina</option>
+    <option value="Guarapari">Guarapari</option>
+    <option value="Linhares">Linhares</option>
+    <option value="São Mateus">São Mateus</option>
+    <option value="Serra">Serra</option>
+    <option value="Vila Velha">Vila Velha</option>
+    <option value="Vitória">Vitória</option>
+            </select>
           </div>
           <div class="campo">
             <label for="itens">Itens necessários</label>
-            <input type="text" id="itens" placeholder="Ex.: Água potável, colchões" required>
+            <input type="text" id="itens" placeholder="Ex.: Água potável, colchões" maxlength="120" required>
           </div>
           <div class="campo">
             <label for="descricao">Descrição da situação</label>
-            <textarea id="descricao" required></textarea>
+            <textarea id="descricao" maxlength="400" required></textarea>
           </div>
-          <p id="mensagem-emergencia" class="mensagem mensagem-sucesso" role="status"></p>
           <div class="cartao-botoes">
-            <button type="submit" class="botao" id="botao-salvar">Abrir campanha</button>
-            <button type="button" class="botao botao-contorno" id="botao-cancelar" onclick="limparFormulario()" hidden>Cancelar edição</button>
+            <button type="submit" class="botao">Salvar campanha</button>
+            <a href="dc-campanhas.html" class="botao botao-contorno">Cancelar</a>
           </div>
         </form>
         <div>
           <h2>Campanhas abertas pela Defesa Civil</h2>
-          <div id="lista-emergencias" class="grade grade-1"></div>
+          <div class="tabela-caixa">
+            <table>
+              <thead>
+                <tr>
+                  <th>Campanha</th>
+                  <th>Alerta</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tabela-emergencias"></tbody>
+            </table>
+          </div>
         </div>
       </div>
     </section>

@@ -8,12 +8,9 @@ for (let i = 0; i < opcoesEntidades.length; i++) {
   selectEntidade.innerHTML += `<option value="${opcoesEntidades[i].id}">${opcoesEntidades[i].nome}</option>`;
 }
 
-const idDaUrl = pegarParametro("id");
-if (idDaUrl !== null) {
+const idDaUrl = Number(pegarParametro("id"));
+if (buscarPorId(opcoesEntidades, idDaUrl) !== null) {
   selectEntidade.value = idDaUrl;
-}
-if (selectEntidade.value === "" && opcoesEntidades.length > 0) {
-  selectEntidade.value = opcoesEntidades[0].id;
 }
 
 campoData.min = dataDeHoje();
@@ -21,28 +18,29 @@ campoData.value = dataDeHoje();
 
 function mostrarInfoEntidade() {
   const entidade = buscarPorId(opcoesEntidades, Number(selectEntidade.value));
+  const area = document.getElementById("info-entidade");
   if (entidade === null) {
-    document.getElementById("info-entidade").innerHTML = '<p class="vazio">Nenhuma entidade aprovada disponível para receber doações.</p>';
+    area.innerHTML = '<p class="vazio">Nenhuma entidade aprovada disponível para receber doações.</p>';
     return;
   }
+
   const necessidades = necessidadesDaEntidade(entidade.id);
-  const sugestoes = document.getElementById("sugestoes");
-  let itens = "";
-  sugestoes.innerHTML = "";
+  let linhas = "";
   for (let i = 0; i < necessidades.length; i++) {
-    itens += `<li><span>${necessidades[i].item}</span>${seloPrioridade(necessidades[i].prioridade)}</li>`;
-    sugestoes.innerHTML += `<option value="${necessidades[i].item}"></option>`;
+    linhas += `<tr><td>${necessidades[i].item}</td><td>${seloPrioridade(necessidades[i].prioridade)}</td></tr>`;
   }
-  if (itens === "") {
-    itens = '<li class="vazio">Nenhuma necessidade publicada ainda.</li>';
+  if (linhas === "") {
+    linhas = '<tr><td colspan="2" class="vazio">Nenhuma necessidade publicada ainda.</td></tr>';
   }
 
-  document.getElementById("info-entidade").innerHTML = `
+  area.innerHTML = `
     <img src="${entidade.foto}" alt="Foto da entidade ${entidade.nome}" class="cartao-foto">
     <h2>${entidade.nome}</h2>
     <p class="texto-suave">${entidade.causa} · ${entidade.cidade}</p>
-    <h3>O que estão precisando</h3>
-    <ul class="lista-necessidades">${itens}</ul>
+    <table>
+      <thead><tr><th>O que estão precisando</th><th>Prioridade</th></tr></thead>
+      <tbody>${linhas}</tbody>
+    </table>
     <ul class="info-lista">
       <li><strong>Endereço:</strong> ${entidade.endereco || "Não informado"}</li>
       <li><strong>Horário:</strong> ${entidade.horario || "Não informado"}</li>
@@ -51,48 +49,35 @@ function mostrarInfoEntidade() {
   `;
 }
 
-function formaEscolhida() {
-  const opcoes = document.getElementsByName("forma");
-  for (let i = 0; i < opcoes.length; i++) {
-    if (opcoes[i].checked) {
-      return opcoes[i].value;
-    }
-  }
-  return "Entregar no local";
-}
-
 formDoacao.addEventListener("submit", function (evento) {
   evento.preventDefault();
-  const doacoes = pegarDoacoes();
   const entidade = buscarPorId(opcoesEntidades, Number(selectEntidade.value));
-  if (entidade === null) {
-    return;
-  }
-  if (formaEscolhida() === "Pix" && !entidade.pix) {
+  const forma = document.querySelector('input[name="forma"]:checked').value;
+  if (forma === "Pix" && !entidade.pix) {
     document.getElementById("mensagem-doacao").textContent = "Essa entidade não tem chave Pix. Escolha entregar no local ou solicitar coleta.";
     return;
   }
-  const nova = {
+
+  const doacoes = pegarDoacoes();
+  doacoes.push({
     id: novoId(doacoes),
     usuario: usuario.usuario,
     doador: usuario.nome,
     entidadeId: entidade.id,
     item: document.getElementById("item").value.trim(),
     quantidade: document.getElementById("quantidade").value.trim(),
-    forma: formaEscolhida(),
+    forma: forma,
     data: campoData.value,
     status: "aguardando"
-  };
-  doacoes.push(nova);
+  });
   salvar("doacoes", doacoes);
 
-  let texto = "Doação registrada! Acompanhe em Minhas doações.";
-  if (nova.forma === "Pix") {
-    texto = "Doação registrada! Faça o Pix para a chave " + entidade.pix + " e acompanhe em Minhas doações.";
+  if (forma === "Pix") {
+    alert("Doação registrada! Faça o Pix para a chave " + entidade.pix);
+  } else {
+    alert("Doação registrada!");
   }
-  document.getElementById("mensagem-doacao").textContent = texto;
-  document.getElementById("item").value = "";
-  document.getElementById("quantidade").value = "";
+  window.location.href = "doador-doacoes.html";
 });
 
 selectEntidade.addEventListener("change", mostrarInfoEntidade);

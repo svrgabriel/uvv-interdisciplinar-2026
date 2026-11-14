@@ -4,35 +4,21 @@ const campoItem = document.getElementById("busca-item");
 const campoCidade = document.getElementById("busca-cidade");
 const campoCausa = document.getElementById("busca-causa");
 
-preencherCidades("busca-cidade", todasEntidades);
+campoItem.value = pegarParametro("item") || "";
+campoCidade.value = pegarParametro("cidade") || "";
+campoCausa.value = pegarParametro("causa") || "";
 
-const causas = [];
-for (let i = 0; i < todasEntidades.length; i++) {
-  if (causas.indexOf(todasEntidades[i].causa) === -1) {
-    causas.push(todasEntidades[i].causa);
-  }
-}
-causas.sort();
-for (let i = 0; i < causas.length; i++) {
-  campoCausa.innerHTML += `<option value="${causas[i]}">${causas[i]}</option>`;
-}
+const termo = campoItem.value.trim();
+const cidade = campoCidade.value;
+const causa = campoCausa.value;
 
-const cidadeDaUrl = pegarParametro("cidade");
-if (cidadeDaUrl !== null) {
-  campoCidade.value = cidadeDaUrl;
-}
-
-function contem(texto, termo) {
-  return texto.toLowerCase().indexOf(termo.toLowerCase()) !== -1;
+function contem(texto, procurado) {
+  return texto.toLowerCase().indexOf(procurado.toLowerCase()) !== -1;
 }
 
 function mostrarCampanhas() {
-  const termo = campoItem.value.trim();
-  const cidade = campoCidade.value;
-  const causa = campoCausa.value;
   const campanhas = campanhasAtivas();
   const area = document.getElementById("resultado-campanhas");
-  area.innerHTML = "";
 
   for (let i = 0; i < campanhas.length; i++) {
     const campanha = campanhas[i];
@@ -47,7 +33,7 @@ function mostrarCampanhas() {
     }
 
     let selo = "";
-    let botao = `<a href="doador-mapa.html?cidade=${campanha.cidade}" class="botao botao-contorno botao-pequeno">Ver pontos de coleta</a>`;
+    let botao = `<a href="doador-mapa.html?cidade=${encodeURIComponent(campanha.cidade)}" class="botao botao-contorno botao-pequeno">Ver pontos de coleta</a>`;
     if (campanha.nivel !== "") {
       selo = seloNivel(campanha.nivel);
     }
@@ -75,11 +61,7 @@ function mostrarCampanhas() {
 }
 
 function mostrarEntidades() {
-  const termo = campoItem.value.trim();
-  const cidade = campoCidade.value;
-  const causa = campoCausa.value;
-  const area = document.getElementById("resultado-entidades");
-  area.innerHTML = "";
+  const tabela = document.getElementById("resultado-entidades");
 
   for (let i = 0; i < todasEntidades.length; i++) {
     const entidade = todasEntidades[i];
@@ -101,41 +83,28 @@ function mostrarEntidades() {
       continue;
     }
     if (itens === "") {
-      itens = '<li class="vazio">Nenhuma necessidade publicada ainda.</li>';
+      itens = '<li class="vazio">Nenhuma necessidade publicada.</li>';
     }
 
-    area.innerHTML += `
-      <article class="cartao">
-        <div class="cartao-topo">
-          <div>
-            <a href="instituicao.html?id=${entidade.id}" class="cartao-titulo">${entidade.nome}</a>
-            <p class="texto-suave">${entidade.causa} · ${entidade.cidade}</p>
+    tabela.innerHTML += `
+      <tr>
+        <td><a href="instituicao.html?id=${entidade.id}" class="cartao-titulo">${entidade.nome}</a><br><span class="texto-suave">${entidade.causa}</span></td>
+        <td>${entidade.cidade}</td>
+        <td><ul class="lista-necessidades">${itens}</ul></td>
+        <td>
+          <div class="acoes">
+            <a href="doador-doar.html?id=${entidade.id}" class="botao botao-pequeno">Quero doar</a>
+            <a href="instituicao.html?id=${entidade.id}" class="botao botao-contorno botao-pequeno">Levar ao local</a>
           </div>
-        </div>
-        <ul class="lista-necessidades">${itens}</ul>
-        <div class="cartao-botoes">
-          <a href="doador-doar.html?id=${entidade.id}" class="botao botao-pequeno">Quero doar</a>
-          <a href="instituicao.html?id=${entidade.id}" class="botao botao-contorno botao-pequeno">Levar ao local</a>
-        </div>
-      </article>
+        </td>
+      </tr>
     `;
   }
 
-  if (area.innerHTML === "") {
-    area.innerHTML = '<p class="vazio">Nenhuma entidade precisa disso no momento.</p>';
+  if (tabela.innerHTML === "") {
+    tabela.innerHTML = '<tr><td colspan="4" class="vazio">Nenhuma entidade encontrada.</td></tr>';
   }
 }
 
-function buscar() {
-  mostrarCampanhas();
-  mostrarEntidades();
-}
-
-document.getElementById("form-busca").addEventListener("submit", function (evento) {
-  evento.preventDefault();
-});
-campoItem.addEventListener("input", buscar);
-campoCidade.addEventListener("change", buscar);
-campoCausa.addEventListener("change", buscar);
-
-buscar();
+mostrarCampanhas();
+mostrarEntidades();

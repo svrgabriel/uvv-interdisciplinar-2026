@@ -11,19 +11,16 @@
 <body>
   <header class="topo">
     <div class="topo-conteudo">
-      <div class="topo-esquerda">
-        <button class="botao-voltar" onclick="history.back()" aria-label="Voltar para a página anterior">← Voltar</button>
-        <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
-      </div>
-      <button class="botao-menu" onclick="abrirMenu()" aria-label="Abrir menu">☰</button>
-      <nav id="menu" class="menu" aria-label="Menu principal">
+      <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      <input type="checkbox" id="abrir-menu" class="menu-check">
+      <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
+      <nav class="menu" aria-label="Menu principal">
         <a href="entidade-necessidades.html" class="ativo">Necessidades</a>
         <a href="entidade-campanhas.html">Campanhas</a>
         <a href="entidade-recebimentos.html">Recebimentos</a>
         <a href="entidade-perfil.html">Perfil</a>
         <span class="usuario" id="nome-usuario"></span>
-        <button class="botao-tema" onclick="trocarTema()" aria-label="Trocar tema claro ou escuro">☾</button>
-        <button class="botao-sair" onclick="sair()">Sair</button>
+        <a href="login.html" class="botao-sair">Sair</a>
       </nav>
     </div>
   </header>
@@ -38,20 +35,20 @@
           <input type="hidden" id="id-necessidade">
           <div class="campo">
             <label for="item">Item</label>
-            <input type="text" id="item" placeholder="Ex.: Leite em pó" required>
+            <input type="text" id="item" placeholder="Ex.: Leite em pó" minlength="2" maxlength="60" required>
           </div>
           <div class="campo">
             <label for="prioridade">Prioridade</label>
-            <select id="prioridade">
-              <option value="urgente">Urgente</option>
+            <select id="prioridade" required>
+              <option value="normal">Normal</option>
               <option value="alta">Alta</option>
-              <option value="normal" selected>Normal</option>
+              <option value="urgente">Urgente</option>
             </select>
           </div>
-          <p id="mensagem-necessidade" class="mensagem" role="status"></p>
+          <p id="mensagem-necessidade" class="mensagem mensagem-erro" role="alert"></p>
           <div class="cartao-botoes">
-            <button type="submit" class="botao" id="botao-salvar">Adicionar</button>
-            <button type="button" class="botao botao-contorno" id="botao-cancelar" onclick="limparFormulario()" hidden>Cancelar edição</button>
+            <button type="submit" class="botao">Salvar</button>
+            <a href="entidade-necessidades.html" class="botao botao-contorno">Cancelar</a>
           </div>
         </form>
         <div>

@@ -1,50 +1,12 @@
 const usuario = protegerPagina("entidade");
 const formCampanha = document.getElementById("form-campanha");
-const minhaEntidade = buscarPorId(pegarEntidades(), usuario.entidadeId);
+const tabela = document.getElementById("tabela-campanhas");
 
-document.getElementById("cidade").value = minhaEntidade.cidade;
-
-function listarCampanhas() {
+function mudarCampanha(id, status) {
   const campanhas = pegarCampanhas();
-  const area = document.getElementById("lista-campanhas");
-  area.innerHTML = "";
-
-  for (let i = campanhas.length - 1; i >= 0; i--) {
-    const campanha = campanhas[i];
-    if (campanha.entidadeId !== usuario.entidadeId) {
-      continue;
-    }
-    let botaoEncerrar = "";
-    if (campanha.status === "ativa") {
-      botaoEncerrar = `<button class="botao botao-contorno botao-pequeno" onclick="encerrarCampanha(${campanha.id})">Encerrar</button>`;
-    }
-    area.innerHTML += `
-      <article class="cartao">
-        <div class="cartao-topo">
-          <h3 class="cartao-titulo">${campanha.titulo}</h3>
-          ${seloStatus(campanha.status)}
-        </div>
-        <p class="texto-suave">${campanha.tipo} · ${campanha.cidade}</p>
-        <p>${campanha.descricao}</p>
-        <p class="texto-suave"><strong>Precisa de:</strong> ${campanha.itens}</p>
-        <div class="cartao-botoes">
-          ${botaoEncerrar}
-          <button class="botao botao-perigo botao-pequeno" onclick="excluirCampanha(${campanha.id})">Excluir</button>
-        </div>
-      </article>
-    `;
-  }
-
-  if (area.innerHTML === "") {
-    area.innerHTML = '<p class="vazio">Nenhuma campanha criada ainda.</p>';
-  }
-}
-
-function encerrarCampanha(id) {
-  const campanhas = pegarCampanhas();
-  buscarPorId(campanhas, id).status = "encerrada";
+  buscarPorId(campanhas, id).status = status;
   salvar("campanhas", campanhas);
-  listarCampanhas();
+  location.reload();
 }
 
 function excluirCampanha(id) {
@@ -52,35 +14,58 @@ function excluirCampanha(id) {
     return;
   }
   const campanhas = pegarCampanhas();
-  const novaLista = [];
+  const restantes = [];
   for (let i = 0; i < campanhas.length; i++) {
     if (campanhas[i].id !== id) {
-      novaLista.push(campanhas[i]);
+      restantes.push(campanhas[i]);
     }
   }
-  salvar("campanhas", novaLista);
-  listarCampanhas();
+  salvar("campanhas", restantes);
+  location.reload();
+}
+
+const campanhas = pegarCampanhas();
+for (let i = 0; i < campanhas.length; i++) {
+  const campanha = campanhas[i];
+  if (campanha.entidadeId !== usuario.entidadeId) {
+    continue;
+  }
+  let encerrar = "";
+  if (campanha.status === "ativa") {
+    encerrar = `<button class="botao botao-contorno botao-pequeno" onclick="mudarCampanha(${campanha.id}, 'encerrada')">Encerrar</button>`;
+  }
+  tabela.innerHTML += `
+    <tr>
+      <td><strong>${campanha.titulo}</strong><br><span class="texto-suave">${campanha.cidade} · ${campanha.itens}</span></td>
+      <td>${seloStatus(campanha.status)}</td>
+      <td>
+        <div class="acoes">
+          ${encerrar}
+          <button class="botao botao-perigo botao-pequeno" onclick="excluirCampanha(${campanha.id})">Excluir</button>
+        </div>
+      </td>
+    </tr>
+  `;
+}
+if (tabela.innerHTML === "") {
+  tabela.innerHTML = '<tr><td colspan="3" class="vazio">Nenhuma campanha criada ainda.</td></tr>';
 }
 
 formCampanha.addEventListener("submit", function (evento) {
   evento.preventDefault();
-  const campanhas = pegarCampanhas();
-  campanhas.push({
-    id: novoId(campanhas),
+  const lista = pegarCampanhas();
+  lista.push({
+    id: novoId(lista),
     titulo: document.getElementById("titulo").value.trim(),
-    tipo: document.getElementById("tipo").value,
-    cidade: document.getElementById("cidade").value.trim(),
+    tipo: "Campanha social",
+    cidade: document.getElementById("cidade").value,
     descricao: document.getElementById("descricao").value.trim(),
     itens: document.getElementById("itens").value.trim(),
     nivel: "",
     entidadeId: usuario.entidadeId,
     status: "pendente"
   });
-  salvar("campanhas", campanhas);
-  formCampanha.reset();
-  document.getElementById("cidade").value = minhaEntidade.cidade;
-  document.getElementById("mensagem-campanha").textContent = "Campanha enviada! Ela aparece para os doadores depois da aprovação do administrador.";
-  listarCampanhas();
+  salvar("campanhas", lista);
+  alert("Campanha enviada para aprovação!");
+  location.reload();
 });
-
-listarCampanhas();
