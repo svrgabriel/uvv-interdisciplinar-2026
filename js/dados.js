@@ -201,6 +201,7 @@ const nomesStatus = {
   aprovada: "Aprovada",
   pendente: "Pendente",
   recusada: "Recusada",
+  suspensa: "Suspensa",
   ativa: "Ativa",
   encerrada: "Encerrada",
   aguardando: "Aguardando entrega",

@@ -421,6 +421,7 @@ a.cartao-titulo:hover {
 .selo-urgente,
 .selo-nivel-alto,
 .selo-status-recusada,
+.selo-status-suspensa,
 .selo-status-cancelada {
   background-color: var(--vermelho-claro);
   color: var(--vermelho);

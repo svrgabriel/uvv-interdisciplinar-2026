@@ -38,7 +38,7 @@ function listarEntidades() {
       `;
     }
 
-    let acao = `<button class="botao botao-perigo botao-pequeno" onclick="mudarStatusEntidade(${entidade.id}, 'recusada')">Suspender</button>`;
+    let acao = `<button class="botao botao-perigo botao-pequeno" onclick="mudarStatusEntidade(${entidade.id}, 'suspensa')">Suspender</button>`;
     if (entidade.status !== "aprovada") {
       acao = `<button class="botao botao-pequeno" onclick="mudarStatusEntidade(${entidade.id}, 'aprovada')">Aprovar</button>`;
     }
