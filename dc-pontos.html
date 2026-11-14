@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
+  <title>Pontos de coleta | DoeUVV</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <div class="topo-esquerda">
+        <button class="botao-voltar" onclick="history.back()" aria-label="Voltar para a página anterior">← Voltar</button>
+        <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      </div>
+      <button class="botao-menu" onclick="abrirMenu()" aria-label="Abrir menu">☰</button>
+      <nav id="menu" class="menu" aria-label="Menu principal">
+        <a href="dc-painel.html">Painel por região</a>
+        <a href="dc-campanhas.html">Campanhas emergenciais</a>
+        <a href="dc-pontos.html" class="ativo">Pontos de coleta</a>
+        <span class="usuario" id="nome-usuario"></span>
+        <button class="botao-tema" onclick="trocarTema()" aria-label="Trocar tema claro ou escuro">☾</button>
+        <button class="botao-sair" onclick="sair()">Sair</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Pontos de coleta por região</h1>
+      <p class="subtitulo">Entidades aprovadas que podem receber doações em cada cidade, com suas necessidades urgentes.</p>
+      <div class="filtros">
+        <label for="filtro-cidade" class="oculto-visual">Cidade</label>
+        <select id="filtro-cidade">
+          <option value="">Todas as cidades</option>
+        </select>
+      </div>
+      <div id="lista-pontos" class="grade"></div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>DoeUVV © 2026 - Desafio Interdisciplinar UVV</p>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/dc-pontos.js"></script>
+</body>
+</html>

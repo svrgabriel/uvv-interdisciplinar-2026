@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
+  <title>Painel por região | DoeUVV</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <div class="topo-esquerda">
+        <button class="botao-voltar" onclick="history.back()" aria-label="Voltar para a página anterior">← Voltar</button>
+        <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      </div>
+      <button class="botao-menu" onclick="abrirMenu()" aria-label="Abrir menu">☰</button>
+      <nav id="menu" class="menu" aria-label="Menu principal">
+        <a href="dc-painel.html" class="ativo">Painel por região</a>
+        <a href="dc-campanhas.html">Campanhas emergenciais</a>
+        <a href="dc-pontos.html">Pontos de coleta</a>
+        <span class="usuario" id="nome-usuario"></span>
+        <button class="botao-tema" onclick="trocarTema()" aria-label="Trocar tema claro ou escuro">☾</button>
+        <button class="botao-sair" onclick="sair()">Sair</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Painel de situação por região</h1>
+      <p class="subtitulo">Visão geral das campanhas emergenciais, entidades e necessidades urgentes em cada cidade.</p>
+      <div class="numeros">
+        <div class="numero"><strong id="total-regioes">0</strong><span>regiões monitoradas</span></div>
+        <div class="numero"><strong id="total-alerta-alto">0</strong><span>regiões em alerta alto</span></div>
+        <div class="numero"><strong id="total-emergenciais">0</strong><span>campanhas emergenciais ativas</span></div>
+        <div class="numero"><strong id="total-urgentes">0</strong><span>necessidades urgentes</span></div>
+      </div>
+    </section>
+
+    <section class="secao">
+      <h2>Regiões</h2>
+      <div id="lista-regioes" class="grade grade-3"></div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>DoeUVV © 2026 - Desafio Interdisciplinar UVV</p>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/dc-painel.js"></script>
+</body>
+</html>

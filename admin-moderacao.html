@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
+  <title>Moderar campanhas | DoeUVV</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <div class="topo-esquerda">
+        <button class="botao-voltar" onclick="history.back()" aria-label="Voltar para a página anterior">← Voltar</button>
+        <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      </div>
+      <button class="botao-menu" onclick="abrirMenu()" aria-label="Abrir menu">☰</button>
+      <nav id="menu" class="menu" aria-label="Menu principal">
+        <a href="admin-aprovacoes.html">Aprovar entidades</a>
+        <a href="admin-moderacao.html" class="ativo">Moderar campanhas</a>
+        <a href="admin-relatorios.html">Relatórios</a>
+        <span class="usuario" id="nome-usuario"></span>
+        <button class="botao-tema" onclick="trocarTema()" aria-label="Trocar tema claro ou escuro">☾</button>
+        <button class="botao-sair" onclick="sair()">Sair</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Moderação de campanhas</h1>
+      <p class="subtitulo">Aprove, recuse, encerre ou exclua campanhas publicadas pelas entidades e pela Defesa Civil.</p>
+      <div class="filtros">
+        <label for="filtro-status" class="oculto-visual">Status</label>
+        <select id="filtro-status">
+          <option value="">Todos os status</option>
+          <option value="pendente">Pendente</option>
+          <option value="ativa">Ativa</option>
+          <option value="encerrada">Encerrada</option>
+          <option value="recusada">Recusada</option>
+        </select>
+      </div>
+      <div class="tabela-caixa">
+        <table>
+          <thead>
+            <tr>
+              <th>Campanha</th>
+              <th>Origem</th>
+              <th>Cidade</th>
+              <th>Tipo</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-campanhas"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>DoeUVV © 2026 - Desafio Interdisciplinar UVV</p>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/admin-moderacao.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
+  <title>Mapa de coleta | DoeUVV</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <div class="topo-esquerda">
+        <button class="botao-voltar" onclick="history.back()" aria-label="Voltar para a página anterior">← Voltar</button>
+        <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      </div>
+      <button class="botao-menu" onclick="abrirMenu()" aria-label="Abrir menu">☰</button>
+      <nav id="menu" class="menu" aria-label="Menu principal">
+        <a href="doador-buscar.html">O que doar</a>
+        <a href="doador-mapa.html" class="ativo">Mapa de coleta</a>
+        <a href="doador-doar.html">Registrar doação</a>
+        <a href="doador-doacoes.html">Minhas doações</a>
+        <span class="usuario" id="nome-usuario"></span>
+        <button class="botao-tema" onclick="trocarTema()" aria-label="Trocar tema claro ou escuro">☾</button>
+        <button class="botao-sair" onclick="sair()">Sair</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Mapa de coleta</h1>
+      <p class="subtitulo">Encontre um ponto de entrega perto de você.</p>
+      <div class="filtros">
+        <label for="filtro-cidade" class="oculto-visual">Cidade</label>
+        <select id="filtro-cidade">
+          <option value="">Todas as cidades</option>
+        </select>
+      </div>
+      <div class="layout-duplo">
+        <ul id="lista-pontos" class="lista-entidades-mapa"></ul>
+        <div>
+          <h2 id="titulo-mapa">Mapa</h2>
+          <iframe id="mapa" class="mapa mapa-grande" title="Mapa do ponto de coleta selecionado"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>DoeUVV © 2026 - Desafio Interdisciplinar UVV</p>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/doador-mapa.js"></script>
+</body>
+</html>

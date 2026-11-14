@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
+  <title>O que doar agora | DoeUVV</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <div class="topo-esquerda">
+        <button class="botao-voltar" onclick="history.back()" aria-label="Voltar para a página anterior">← Voltar</button>
+        <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      </div>
+      <button class="botao-menu" onclick="abrirMenu()" aria-label="Abrir menu">☰</button>
+      <nav id="menu" class="menu" aria-label="Menu principal">
+        <a href="doador-buscar.html" class="ativo">O que doar</a>
+        <a href="doador-mapa.html">Mapa de coleta</a>
+        <a href="doador-doar.html">Registrar doação</a>
+        <a href="doador-doacoes.html">Minhas doações</a>
+        <span class="usuario" id="nome-usuario"></span>
+        <button class="botao-tema" onclick="trocarTema()" aria-label="Trocar tema claro ou escuro">☾</button>
+        <button class="botao-sair" onclick="sair()">Sair</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>O que doar agora</h1>
+      <p class="subtitulo">Pesquise o que você quer doar e veja as entidades e campanhas que mais precisam.</p>
+      <form class="filtros" id="form-busca" role="search">
+        <label for="busca-item" class="oculto-visual">Item</label>
+        <input type="search" id="busca-item" placeholder="Ex.: fraldas, arroz, ração">
+        <label for="busca-cidade" class="oculto-visual">Cidade</label>
+        <select id="busca-cidade">
+          <option value="">Todas as cidades</option>
+        </select>
+        <label for="busca-causa" class="oculto-visual">Causa</label>
+        <select id="busca-causa">
+          <option value="">Todas as causas</option>
+        </select>
+      </form>
+    </section>
+
+    <section>
+      <h2>Campanhas</h2>
+      <div id="resultado-campanhas" class="grade"></div>
+    </section>
+
+    <section class="secao">
+      <h2>Entidades</h2>
+      <div id="resultado-entidades" class="grade"></div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>DoeUVV © 2026 - Desafio Interdisciplinar UVV</p>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/doador-buscar.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
+  <title>Cadastrar entidade | DoeUVV</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <div class="topo-esquerda">
+        <button class="botao-voltar" onclick="history.back()" aria-label="Voltar para a página anterior">← Voltar</button>
+        <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      </div>
+      <button class="botao-menu" onclick="abrirMenu()" aria-label="Abrir menu">☰</button>
+      <nav id="menu" class="menu" aria-label="Menu principal">
+        <a href="index.html">Início</a>
+        <a href="index.html#como-funciona">Como funciona</a>
+        <a href="cadastro.html" class="ativo">Cadastrar entidade</a>
+        <button class="botao-tema" onclick="trocarTema()" aria-label="Trocar tema claro ou escuro">☾</button>
+        <a href="login.html" id="link-entrar" class="botao botao-pequeno">Entrar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Cadastrar entidade</h1>
+      <p class="subtitulo">Preencha os dados da sua instituição. O cadastro será analisado pelo administrador antes de aparecer no site.</p>
+      <form id="form-cadastro" class="formulario">
+        <div class="campos-linha">
+          <div class="campo">
+            <label for="nome">Nome da entidade</label>
+            <input type="text" id="nome" placeholder="Ex.: Casa do Caminho" required>
+          </div>
+          <div class="campo">
+            <label for="causa">Causa</label>
+            <input type="text" id="causa" placeholder="Ex.: Abrigo infantil" required>
+          </div>
+        </div>
+        <div class="campos-linha">
+          <div class="campo">
+            <label for="cidade">Cidade</label>
+            <input type="text" id="cidade" placeholder="Ex.: Vila Velha" required>
+          </div>
+          <div class="campo">
+            <label for="cep">CEP</label>
+            <input type="text" id="cep" placeholder="00000-000" maxlength="9">
+          </div>
+        </div>
+        <div class="campo">
+          <label for="endereco">Endereço</label>
+          <input type="text" id="endereco" placeholder="Rua, número - bairro">
+        </div>
+        <div class="campos-linha">
+          <div class="campo">
+            <label for="horario">Dias e horário de entrega</label>
+            <input type="text" id="horario" placeholder="Ex.: Seg a Sex, 8h às 17h">
+          </div>
+          <div class="campo">
+            <label for="pix">Chave Pix</label>
+            <input type="text" id="pix" placeholder="E-mail, CNPJ ou telefone">
+          </div>
+        </div>
+        <div class="campo">
+          <label for="historia">Nossa história</label>
+          <textarea id="historia" placeholder="Conte quem vocês são e quem vocês ajudam"></textarea>
+        </div>
+        <p id="mensagem-cadastro" class="mensagem mensagem-sucesso" role="status"></p>
+        <button type="submit" class="botao">Enviar cadastro</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>DoeUVV © 2026 - Desafio Interdisciplinar UVV</p>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/cadastro.js"></script>
+</body>
+</html>

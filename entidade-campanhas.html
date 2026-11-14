@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
+  <title>Campanhas | DoeUVV</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <div class="topo-esquerda">
+        <button class="botao-voltar" onclick="history.back()" aria-label="Voltar para a página anterior">← Voltar</button>
+        <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      </div>
+      <button class="botao-menu" onclick="abrirMenu()" aria-label="Abrir menu">☰</button>
+      <nav id="menu" class="menu" aria-label="Menu principal">
+        <a href="entidade-necessidades.html">Necessidades</a>
+        <a href="entidade-campanhas.html" class="ativo">Campanhas</a>
+        <a href="entidade-recebimentos.html">Recebimentos</a>
+        <a href="entidade-perfil.html">Perfil</a>
+        <span class="usuario" id="nome-usuario"></span>
+        <button class="botao-tema" onclick="trocarTema()" aria-label="Trocar tema claro ou escuro">☾</button>
+        <button class="botao-sair" onclick="sair()">Sair</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Campanhas da entidade</h1>
+      <p class="subtitulo">Divulgue campanhas específicas. Novas campanhas passam pela aprovação do administrador antes de aparecer para os doadores.</p>
+      <div class="layout-duplo">
+        <form id="form-campanha" class="formulario">
+          <h2>Nova campanha</h2>
+          <div class="campo">
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" placeholder="Ex.: Inverno Solidário" required>
+          </div>
+          <div class="campos-linha">
+            <div class="campo">
+              <label for="tipo">Tipo</label>
+              <select id="tipo">
+                <option>Campanha social</option>
+                <option>Enchente</option>
+                <option>Deslizamento</option>
+                <option>Seca</option>
+                <option>Incêndio</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="cidade">Cidade</label>
+              <input type="text" id="cidade" required>
+            </div>
+          </div>
+          <div class="campo">
+            <label for="itens">Itens necessários</label>
+            <input type="text" id="itens" placeholder="Ex.: Cobertores, agasalhos" required>
+          </div>
+          <div class="campo">
+            <label for="descricao">Descrição</label>
+            <textarea id="descricao" required></textarea>
+          </div>
+          <p id="mensagem-campanha" class="mensagem mensagem-sucesso" role="status"></p>
+          <button type="submit" class="botao">Enviar para aprovação</button>
+        </form>
+        <div>
+          <h2>Minhas campanhas</h2>
+          <div id="lista-campanhas" class="grade grade-1"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>DoeUVV © 2026 - Desafio Interdisciplinar UVV</p>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/entidade-campanhas.js"></script>
+</body>
+</html>

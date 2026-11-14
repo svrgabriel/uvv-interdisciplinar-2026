@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
+  <title>Campanhas emergenciais | DoeUVV</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <div class="topo-esquerda">
+        <button class="botao-voltar" onclick="history.back()" aria-label="Voltar para a página anterior">← Voltar</button>
+        <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      </div>
+      <button class="botao-menu" onclick="abrirMenu()" aria-label="Abrir menu">☰</button>
+      <nav id="menu" class="menu" aria-label="Menu principal">
+        <a href="dc-painel.html">Painel por região</a>
+        <a href="dc-campanhas.html" class="ativo">Campanhas emergenciais</a>
+        <a href="dc-pontos.html">Pontos de coleta</a>
+        <span class="usuario" id="nome-usuario"></span>
+        <button class="botao-tema" onclick="trocarTema()" aria-label="Trocar tema claro ou escuro">☾</button>
+        <button class="botao-sair" onclick="sair()">Sair</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Campanhas emergenciais</h1>
+      <p class="subtitulo">Abra campanhas para enchentes, deslizamentos, secas, incêndios e outras situações de calamidade. Elas ficam visíveis para os doadores na hora.</p>
+      <div class="layout-duplo">
+        <form id="form-emergencia" class="formulario">
+          <h2 id="titulo-form">Nova campanha emergencial</h2>
+          <input type="hidden" id="id-campanha">
+          <div class="campo">
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" placeholder="Ex.: SOS Enchente Cachoeiro" required>
+          </div>
+          <div class="campos-linha">
+            <div class="campo">
+              <label for="tipo">Tipo de desastre</label>
+              <select id="tipo">
+                <option>Enchente</option>
+                <option>Deslizamento</option>
+                <option>Seca</option>
+                <option>Incêndio</option>
+                <option>Vendaval</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="nivel">Nível de alerta</label>
+              <select id="nivel">
+                <option>Alto</option>
+                <option>Médio</option>
+                <option>Baixo</option>
+              </select>
+            </div>
+          </div>
+          <div class="campo">
+            <label for="cidade">Cidade / região</label>
+            <input type="text" id="cidade" required>
+          </div>
+          <div class="campo">
+            <label for="itens">Itens necessários</label>
+            <input type="text" id="itens" placeholder="Ex.: Água potável, colchões" required>
+          </div>
+          <div class="campo">
+            <label for="descricao">Descrição da situação</label>
+            <textarea id="descricao" required></textarea>
+          </div>
+          <p id="mensagem-emergencia" class="mensagem mensagem-sucesso" role="status"></p>
+          <div class="cartao-botoes">
+            <button type="submit" class="botao" id="botao-salvar">Abrir campanha</button>
+            <button type="button" class="botao botao-contorno" id="botao-cancelar" onclick="limparFormulario()" hidden>Cancelar edição</button>
+          </div>
+        </form>
+        <div>
+          <h2>Campanhas abertas pela Defesa Civil</h2>
+          <div id="lista-emergencias" class="grade grade-1"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>DoeUVV © 2026 - Desafio Interdisciplinar UVV</p>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/dc-campanhas.js"></script>
+</body>
+</html>
