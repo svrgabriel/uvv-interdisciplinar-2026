@@ -54,7 +54,7 @@ formNecessidade.addEventListener("submit", function (evento) {
   const prioridade = document.getElementById("prioridade").value;
 
   if (id === 0) {
-    if (minhas.length >= 50) {
+    if (necessidadesDaEntidade(usuario.entidadeId).length >= 50) {
       document.getElementById("mensagem-necessidade").textContent = "Limite de 50 necessidades atingido.";
       return;
     }
