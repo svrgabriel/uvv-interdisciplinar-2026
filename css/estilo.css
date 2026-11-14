@@ -37,6 +37,14 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 96px;
+}
+
 body {
   font-family: "Segoe UI", Roboto, Arial, sans-serif;
   background-color: var(--fundo);
@@ -691,6 +699,14 @@ tbody tr:last-child td {
 }
 
 @media (max-width: 768px) {
+  .topo {
+    position: static;
+  }
+
+  section[id] {
+    scroll-margin-top: 24px;
+  }
+
   .botao-menu {
     display: block;
   }
