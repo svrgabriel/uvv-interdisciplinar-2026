@@ -58,6 +58,13 @@ formDoacao.addEventListener("submit", function (evento) {
   evento.preventDefault();
   const doacoes = pegarDoacoes();
   const entidade = buscarPorId(opcoesEntidades, Number(selectEntidade.value));
+  if (entidade === null) {
+    return;
+  }
+  if (formaEscolhida() === "Pix" && !entidade.pix) {
+    document.getElementById("mensagem-doacao").textContent = "Essa entidade não tem chave Pix. Escolha entregar no local ou solicitar coleta.";
+    return;
+  }
   const nova = {
     id: novoId(doacoes),
     usuario: usuario.usuario,
