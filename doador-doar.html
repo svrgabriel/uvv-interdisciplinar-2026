@@ -38,11 +38,11 @@
           <div class="campos-linha">
             <div class="campo">
               <label for="item">O que você vai doar</label>
-              <input type="text" id="item" placeholder="Ex.: Fraldas infantis" maxlength="60" required>
+              <select id="item" required></select>
             </div>
             <div class="campo">
               <label for="quantidade">Quantidade</label>
-              <input type="text" id="quantidade" placeholder="Ex.: 3 pacotes" maxlength="30" required>
+              <input type="number" id="quantidade" placeholder="Ex.: 3" min="1" max="9999" step="1" required>
             </div>
           </div>
           <fieldset>
@@ -56,7 +56,7 @@
             <input type="date" id="data" required>
           </div>
           <p id="mensagem-doacao" class="mensagem mensagem-erro" role="alert"></p>
-          <button type="submit" class="botao">Registrar intenção de doação</button>
+          <button type="submit" class="botao" id="botao-doar">Registrar intenção de doação</button>
         </form>
         <article id="info-entidade" class="cartao"></article>
       </div>

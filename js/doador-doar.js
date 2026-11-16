@@ -3,6 +3,8 @@ const opcoesEntidades = entidadesAprovadas();
 const selectEntidade = document.getElementById("entidade");
 const campoData = document.getElementById("data");
 const formDoacao = document.getElementById("form-doacao");
+const selectItem = document.getElementById("item");
+const botaoDoar = document.getElementById("botao-doar");
 
 for (let i = 0; i < opcoesEntidades.length; i++) {
   selectEntidade.innerHTML += `<option value="${opcoesEntidades[i].id}">${opcoesEntidades[i].nome}</option>`;
@@ -19,8 +21,11 @@ campoData.value = dataDeHoje();
 function mostrarInfoEntidade() {
   const entidade = buscarPorId(opcoesEntidades, Number(selectEntidade.value));
   const area = document.getElementById("info-entidade");
+  selectItem.innerHTML = "";
   if (entidade === null) {
     area.innerHTML = '<p class="vazio">Nenhuma entidade aprovada disponível para receber doações.</p>';
+    selectItem.innerHTML = '<option value="">Nenhuma necessidade disponível</option>';
+    botaoDoar.disabled = true;
     return;
   }
 
@@ -28,9 +33,15 @@ function mostrarInfoEntidade() {
   let linhas = "";
   for (let i = 0; i < necessidades.length; i++) {
     linhas += `<tr><td>${necessidades[i].item}</td><td>${seloPrioridade(necessidades[i].prioridade)}</td></tr>`;
+    const opcao = document.createElement("option");
+    opcao.value = necessidades[i].item;
+    opcao.textContent = necessidades[i].item;
+    selectItem.appendChild(opcao);
   }
+  botaoDoar.disabled = necessidades.length === 0;
   if (linhas === "") {
     linhas = '<tr><td colspan="2" class="vazio">Nenhuma necessidade publicada ainda.</td></tr>';
+    selectItem.innerHTML = '<option value="">Essa instituição ainda não publicou necessidades</option>';
   }
 
   area.innerHTML = `
@@ -64,7 +75,7 @@ formDoacao.addEventListener("submit", function (evento) {
     usuario: usuario.usuario,
     doador: usuario.nome,
     entidadeId: entidade.id,
-    item: document.getElementById("item").value.trim(),
+    item: selectItem.value,
     quantidade: document.getElementById("quantidade").value.trim(),
     forma: forma,
     data: campoData.value,
