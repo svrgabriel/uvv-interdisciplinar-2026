@@ -35,14 +35,28 @@
             <label for="entidade">Entidade</label>
             <select id="entidade" required></select>
           </div>
+          <div class="campo">
+            <label for="item">O que você vai doar</label>
+            <select id="item" required></select>
+          </div>
           <div class="campos-linha">
-            <div class="campo">
-              <label for="item">O que você vai doar</label>
-              <select id="item" required></select>
-            </div>
             <div class="campo">
               <label for="quantidade">Quantidade</label>
               <input type="number" id="quantidade" placeholder="Ex.: 3" min="1" max="9999" step="1" required>
+            </div>
+            <div class="campo">
+              <label for="unidade">Unidade</label>
+              <select id="unidade" required>
+                <option value="unidades">unidades</option>
+                <option value="kg">kg</option>
+                <option value="g">gramas</option>
+                <option value="L">litros</option>
+                <option value="mL">ml</option>
+                <option value="pacotes">pacotes</option>
+                <option value="caixas">caixas</option>
+                <option value="latas">latas</option>
+                <option value="reais">reais (R$)</option>
+              </select>
             </div>
           </div>
           <fieldset>

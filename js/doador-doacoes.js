@@ -28,7 +28,7 @@ for (let i = doacoes.length - 1; i >= 0; i--) {
       <td>${formatarData(doacao.data)}</td>
       <td>${entidade === null ? "Entidade removida" : entidade.nome}</td>
       <td>${doacao.item}</td>
-      <td>${doacao.quantidade}</td>
+      <td>${doacao.quantidade} ${doacao.unidade || ""}</td>
       <td>${doacao.forma}</td>
       <td>${seloStatus(doacao.status)}</td>
       <td>${acao}</td>

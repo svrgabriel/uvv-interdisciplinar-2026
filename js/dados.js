@@ -190,11 +190,11 @@ const campanhasIniciais = [
 ];
 
 const doacoesIniciais = [
-  { id: 1, usuario: "doador", doador: "Maria Doadora", entidadeId: 1, item: "Leite em pó", quantidade: "6", forma: "Entregar no local", data: "2026-11-10", status: "recebida" },
-  { id: 2, usuario: "doador", doador: "Maria Doadora", entidadeId: 3, item: "Ração para cães e gatos", quantidade: "10", forma: "Entregar no local", data: "2026-11-18", status: "aguardando" },
-  { id: 3, usuario: "", doador: "João Pereira", entidadeId: 1, item: "Fraldas infantis", quantidade: "3", forma: "Solicitar coleta", data: "2026-11-16", status: "aguardando" },
-  { id: 4, usuario: "", doador: "Ana Souza", entidadeId: 1, item: "Dinheiro", quantidade: "50", forma: "Pix", data: "2026-11-05", status: "recebida" },
-  { id: 5, usuario: "", doador: "Carlos Lima", entidadeId: 5, item: "Água potável", quantidade: "20", forma: "Entregar no local", data: "2026-11-12", status: "recebida" }
+  { id: 1, usuario: "doador", doador: "Maria Doadora", entidadeId: 1, item: "Leite em pó", quantidade: "6", unidade: "latas", forma: "Entregar no local", data: "2026-11-10", status: "recebida" },
+  { id: 2, usuario: "doador", doador: "Maria Doadora", entidadeId: 3, item: "Ração para cães e gatos", quantidade: "10", unidade: "kg", forma: "Entregar no local", data: "2026-11-18", status: "aguardando" },
+  { id: 3, usuario: "", doador: "João Pereira", entidadeId: 1, item: "Fraldas infantis", quantidade: "3", unidade: "pacotes", forma: "Solicitar coleta", data: "2026-11-16", status: "aguardando" },
+  { id: 4, usuario: "", doador: "Ana Souza", entidadeId: 1, item: "Dinheiro", quantidade: "50", unidade: "reais", forma: "Pix", data: "2026-11-05", status: "recebida" },
+  { id: 5, usuario: "", doador: "Carlos Lima", entidadeId: 5, item: "Água potável", quantidade: "20", unidade: "L", forma: "Entregar no local", data: "2026-11-12", status: "recebida" }
 ];
 
 const nomesStatus = {

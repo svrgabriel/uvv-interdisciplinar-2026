@@ -24,7 +24,7 @@ for (let i = doacoes.length - 1; i >= 0; i--) {
       <td>${formatarData(doacao.data)}</td>
       <td>${doacao.doador}</td>
       <td>${doacao.item}</td>
-      <td>${doacao.quantidade}</td>
+      <td>${doacao.quantidade} ${doacao.unidade || ""}</td>
       <td>${doacao.forma}</td>
       <td>${seloStatus(doacao.status)}</td>
       <td>${acao}</td>
@@ -45,6 +45,7 @@ formPresencial.addEventListener("submit", function (evento) {
     entidadeId: usuario.entidadeId,
     item: document.getElementById("item").value.trim(),
     quantidade: document.getElementById("quantidade").value.trim(),
+    unidade: document.getElementById("unidade").value,
     forma: "Entregue no local",
     data: dataDeHoje(),
     status: "recebida"

@@ -77,6 +77,7 @@ formDoacao.addEventListener("submit", function (evento) {
     entidadeId: entidade.id,
     item: selectItem.value,
     quantidade: document.getElementById("quantidade").value.trim(),
+    unidade: document.getElementById("unidade").value,
     forma: forma,
     data: campoData.value,
     status: "aguardando"
