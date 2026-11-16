@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
+  <title>Campanhas emergenciais | DoeUVV</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      <input type="checkbox" id="abrir-menu" class="menu-check">
+      <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
+      <nav class="menu" aria-label="Menu principal">
+        <a href="dc-painel.html">Painel por região</a>
+        <a href="dc-campanhas.html" class="ativo">Campanhas emergenciais</a>
+        <a href="dc-pontos.html">Pontos de coleta</a>
+        <span class="usuario" id="nome-usuario"></span>
+        <a href="login.html" class="botao-sair">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Campanhas emergenciais</h1>
+      <p class="subtitulo">Abra campanhas para enchentes, deslizamentos, secas, incêndios e outras situações de calamidade. Elas ficam visíveis para os doadores na hora.</p>
+      <div class="layout-duplo">
+        <form id="form-emergencia" class="formulario">
+          <h2 id="titulo-form">Nova campanha emergencial</h2>
+          <input type="hidden" id="id-campanha">
+          <div class="campo">
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" placeholder="Ex.: SOS Enchente Cachoeiro" minlength="3" maxlength="60" required>
+          </div>
+          <div class="campos-linha">
+            <div class="campo">
+              <label for="tipo">Tipo de desastre</label>
+              <select id="tipo" required>
+                <option>Enchente</option>
+                <option>Deslizamento</option>
+                <option>Seca</option>
+                <option>Incêndio</option>
+                <option>Vendaval</option>
+                <option>Outra emergência</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="nivel">Nível de alerta</label>
+              <select id="nivel" required>
+                <option>Alto</option>
+                <option>Médio</option>
+                <option>Baixo</option>
+              </select>
+            </div>
+          </div>
+          <div class="campo">
+            <label for="cidade">Cidade / região</label>
+            <select id="cidade" required>
+              <option value="">Selecione</option>
+    <option value="Aracruz">Aracruz</option>
+    <option value="Cachoeiro de Itapemirim">Cachoeiro de Itapemirim</option>
+    <option value="Cariacica">Cariacica</option>
+    <option value="Colatina">Colatina</option>
+    <option value="Guarapari">Guarapari</option>
+    <option value="Linhares">Linhares</option>
+    <option value="São Mateus">São Mateus</option>
+    <option value="Serra">Serra</option>
+    <option value="Vila Velha">Vila Velha</option>
+    <option value="Vitória">Vitória</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="itens">Itens necessários</label>
+            <input type="text" id="itens" placeholder="Ex.: Água potável, colchões" maxlength="120" required>
+          </div>
+          <div class="campo">
+            <label for="descricao">Descrição da situação</label>
+            <textarea id="descricao" maxlength="400" required></textarea>
+          </div>
+          <div class="cartao-botoes">
+            <button type="submit" class="botao">Salvar campanha</button>
+            <a href="dc-campanhas.html" class="botao botao-contorno">Cancelar</a>
+          </div>
+        </form>
+        <div>
+          <h2>Campanhas abertas pela Defesa Civil</h2>
+          <div class="tabela-caixa">
+            <table>
+              <thead>
+                <tr>
+                  <th>Campanha</th>
+                  <th>Alerta</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tabela-emergencias"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>DoeUVV © 2026 - Desafio Interdisciplinar UVV</p>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/dc-campanhas.js"></script>
+</body>
+</html>

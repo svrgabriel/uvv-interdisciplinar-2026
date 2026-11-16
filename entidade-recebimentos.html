@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
+  <title>Recebimentos | DoeUVV</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      <input type="checkbox" id="abrir-menu" class="menu-check">
+      <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
+      <nav class="menu" aria-label="Menu principal">
+        <a href="entidade-necessidades.html">Necessidades</a>
+        <a href="entidade-campanhas.html">Campanhas</a>
+        <a href="entidade-recebimentos.html" class="ativo">Recebimentos</a>
+        <a href="entidade-perfil.html">Perfil</a>
+        <span class="usuario" id="nome-usuario"></span>
+        <a href="login.html" class="botao-sair">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Recebimentos</h1>
+      <p class="subtitulo">Confirme as doações que chegaram e registre doações entregues direto na entidade.</p>
+      <div class="tabela-caixa">
+        <table>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Doador</th>
+              <th>Item</th>
+              <th>Quantidade</th>
+              <th>Entrega</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-recebimentos"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="secao">
+      <form id="form-presencial" class="formulario">
+        <h2>Registrar doação presencial</h2>
+        <div class="campos-linha">
+          <div class="campo">
+            <label for="doador">Nome do doador</label>
+            <input type="text" id="doador" maxlength="60" required>
+          </div>
+          <div class="campo">
+            <label for="item">Item</label>
+            <input type="text" id="item" maxlength="60" required>
+          </div>
+          <div class="campo">
+            <label for="quantidade">Quantidade</label>
+            <input type="number" id="quantidade" min="1" max="9999" step="1" required>
+          </div>
+          <div class="campo">
+            <label for="unidade">Unidade</label>
+            <select id="unidade" required>
+              <option value="unidades">unidades</option>
+              <option value="kg">kg</option>
+              <option value="g">gramas</option>
+              <option value="L">litros</option>
+              <option value="mL">ml</option>
+              <option value="pacotes">pacotes</option>
+              <option value="caixas">caixas</option>
+              <option value="latas">latas</option>
+              <option value="reais">reais (R$)</option>
+            </select>
+          </div>
+        </div>
+        <div class="cartao-botoes">
+          <button type="submit" class="botao">Registrar recebimento</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>DoeUVV © 2026 - Desafio Interdisciplinar UVV</p>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/entidade-recebimentos.js"></script>
+</body>
+</html>

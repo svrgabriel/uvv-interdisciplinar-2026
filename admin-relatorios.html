@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
+  <title>Relatórios | DoeUVV</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      <input type="checkbox" id="abrir-menu" class="menu-check">
+      <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
+      <nav class="menu" aria-label="Menu principal">
+        <a href="admin-aprovacoes.html">Aprovar entidades</a>
+        <a href="admin-moderacao.html">Moderar campanhas</a>
+        <a href="admin-relatorios.html" class="ativo">Relatórios</a>
+        <span class="usuario" id="nome-usuario"></span>
+        <a href="login.html" class="botao-sair">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Relatórios</h1>
+      <p class="subtitulo">Resumo geral da plataforma.</p>
+      <div class="numeros">
+        <div class="numero"><strong id="rel-entidades">0</strong><span>entidades aprovadas</span></div>
+        <div class="numero"><strong id="rel-pendentes">0</strong><span>entidades pendentes</span></div>
+        <div class="numero"><strong id="rel-campanhas">0</strong><span>campanhas ativas</span></div>
+        <div class="numero"><strong id="rel-doacoes">0</strong><span>doações recebidas</span></div>
+      </div>
+    </section>
+
+    <section class="secao grade">
+      <div>
+        <h2>Necessidades por prioridade</h2>
+        <div class="tabela-caixa">
+          <table>
+            <thead><tr><th>Prioridade</th><th>Quantidade</th></tr></thead>
+            <tbody>
+              <tr><td><span class="selo selo-urgente">Urgente</span></td><td id="rel-urgente">0</td></tr>
+              <tr><td><span class="selo selo-alta">Alta</span></td><td id="rel-alta">0</td></tr>
+              <tr><td><span class="selo selo-normal">Normal</span></td><td id="rel-normal">0</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <h2>Doações por status</h2>
+        <div class="tabela-caixa">
+          <table>
+            <thead><tr><th>Status</th><th>Quantidade</th></tr></thead>
+            <tbody>
+              <tr><td><span class="selo selo-status-aguardando">Aguardando entrega</span></td><td id="rel-aguardando">0</td></tr>
+              <tr><td><span class="selo selo-status-recebida">Recebida</span></td><td id="rel-recebida">0</td></tr>
+              <tr><td><span class="selo selo-status-cancelada">Cancelada</span></td><td id="rel-cancelada">0</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao">
+      <h2>Doações por entidade</h2>
+      <div class="tabela-caixa">
+        <table>
+          <thead>
+            <tr>
+              <th>Entidade</th>
+              <th>Cidade</th>
+              <th>Necessidades</th>
+              <th>Aguardando</th>
+              <th>Recebidas</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-relatorio"></tbody>
+        </table>
+      </div>
+      <p class="secao"><button class="botao" onclick="window.print()">Imprimir relatório</button></p>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>DoeUVV © 2026 - Desafio Interdisciplinar UVV</p>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/admin-relatorios.js"></script>
+</body>
+</html>

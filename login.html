@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
+  <title>Entrar | DoeUVV</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      <input type="checkbox" id="abrir-menu" class="menu-check">
+      <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
+      <nav class="menu" aria-label="Menu principal">
+        <a href="index.html">Início</a>
+        <a href="index.html#como-funciona">Como funciona</a>
+        <a href="cadastro.html">Cadastrar entidade</a>
+        <a href="login.html" class="botao botao-pequeno">Entrar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="login-caixa">
+      <h1>Entrar</h1>
+      <p class="subtitulo">Acesse sua área no DoeUVV.</p>
+      <form id="form-login" class="formulario">
+        <div class="campo">
+          <label for="usuario">Usuário</label>
+          <input type="text" id="usuario" required autocomplete="username">
+        </div>
+        <div class="campo">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" required autocomplete="current-password">
+        </div>
+        <p id="mensagem-login" class="mensagem mensagem-erro" role="alert"></p>
+        <button type="submit" class="botao">Entrar</button>
+        <p class="texto-suave">É uma entidade e ainda não tem cadastro? <a href="cadastro.html" class="mensagem-sucesso">Cadastre-se</a></p>
+      </form>
+      <details class="credenciais">
+        <summary>Usuários para teste</summary>
+        <div class="tabela-caixa">
+          <table>
+            <thead>
+              <tr><th>Perfil</th><th>Usuário</th><th>Senha</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Doador</td><td>doador</td><td>doa#2026</td></tr>
+              <tr><td>Entidade</td><td>entidade</td><td>ent!2026</td></tr>
+              <tr><td>Defesa Civil</td><td>defesacivil</td><td>dc$-2026</td></tr>
+              <tr><td>Administrador</td><td>admin</td><td>adm@2026</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>DoeUVV © 2026 - Desafio Interdisciplinar UVV</p>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

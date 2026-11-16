@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
+  <title>Início | DoeUVV</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      <input type="checkbox" id="abrir-menu" class="menu-check">
+      <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
+      <nav class="menu" aria-label="Menu principal">
+        <a href="index.html" class="ativo">Início</a>
+        <a href="index.html#como-funciona">Como funciona</a>
+        <a href="cadastro.html">Cadastrar entidade</a>
+        <a href="login.html" class="botao botao-pequeno">Entrar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="hero-emoji" aria-hidden="true">❤️</span>
+      <h1>DoeUVV</h1>
+      <p class="hero-texto">Conecta doadores a entidades e campanhas emergenciais: onde doar, o que doar e quais doações são prioritárias.</p>
+      <div class="hero-botoes">
+        <a href="login.html" class="botao">Quero doar</a>
+        <a href="cadastro.html" class="botao botao-contorno">Sou uma entidade</a>
+      </div>
+    </section>
+
+    <section class="numeros" aria-label="Números da plataforma">
+      <div class="numero"><strong id="total-entidades">0</strong><span>entidades verificadas</span></div>
+      <div class="numero"><strong id="total-campanhas">0</strong><span>campanhas ativas</span></div>
+      <div class="numero"><strong id="total-necessidades">0</strong><span>necessidades publicadas</span></div>
+      <div class="numero"><strong id="total-doacoes">0</strong><span>doações registradas</span></div>
+    </section>
+
+    <section id="objetivo" class="secao">
+      <h2>Nosso objetivo</h2>
+      <p class="subtitulo">Muita gente quer ajudar, mas não sabe quem precisa, o que doar ou onde entregar. Ao mesmo tempo, orfanatos, abrigos e instituições sociais têm dificuldade para divulgar suas necessidades. O DoeUVV aproxima essas duas pontas de forma simples, transparente e confiável, inclusive em situações de enchentes, deslizamentos, secas e incêndios.</p>
+    </section>
+
+    <section id="como-funciona" class="secao">
+      <h2>Como funciona</h2>
+      <ol class="passos">
+        <li class="passo">
+          <span class="passo-numero">1</span>
+          <h3>Encontre</h3>
+          <p class="texto-suave">Pesquise necessidades e campanhas por item, cidade ou causa.</p>
+        </li>
+        <li class="passo">
+          <span class="passo-numero">2</span>
+          <h3>Escolha</h3>
+          <p class="texto-suave">Veja o perfil da entidade, a prioridade de cada item e o local de entrega.</p>
+        </li>
+        <li class="passo">
+          <span class="passo-numero">3</span>
+          <h3>Registre</h3>
+          <p class="texto-suave">Registre sua intenção de doação e escolha como vai entregar.</p>
+        </li>
+        <li class="passo">
+          <span class="passo-numero">4</span>
+          <h3>Acompanhe</h3>
+          <p class="texto-suave">A entidade confirma o recebimento e você acompanha tudo pelo site.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="secao">
+      <h2>Campanhas em destaque</h2>
+      <div id="lista-campanhas" class="grade grade-3"></div>
+    </section>
+
+    <section class="secao">
+      <h2>Entidades em destaque</h2>
+      <div id="lista-entidades" class="grade grade-3"></div>
+    </section>
+
+    <section class="secao">
+      <h2>Quem usa o DoeUVV</h2>
+      <div class="grade">
+        <article class="cartao">
+          <h3>Doador</h3>
+          <p class="texto-suave">Busca necessidades e campanhas, registra intenções de doação e acompanha suas doações.</p>
+        </article>
+        <article class="cartao">
+          <h3>Entidade</h3>
+          <p class="texto-suave">Cadastra necessidades, divulga campanhas e confirma o recebimento das doações.</p>
+        </article>
+        <article class="cartao">
+          <h3>Defesa Civil</h3>
+          <p class="texto-suave">Abre campanhas emergenciais e acompanha a situação de cada região.</p>
+        </article>
+        <article class="cartao">
+          <h3>Administrador</h3>
+          <p class="texto-suave">Aprova entidades e campanhas, faz a moderação e acompanha os relatórios.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>DoeUVV © 2026 - Desafio Interdisciplinar UVV</p>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/inicio.js"></script>
+</body>
+</html>

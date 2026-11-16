@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
+  <title>Mapa de coleta | DoeUVV</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      <input type="checkbox" id="abrir-menu" class="menu-check">
+      <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
+      <nav class="menu" aria-label="Menu principal">
+        <a href="doador-buscar.html">O que doar</a>
+        <a href="doador-mapa.html" class="ativo">Mapa de coleta</a>
+        <a href="doador-doar.html">Registrar doação</a>
+        <a href="doador-doacoes.html">Minhas doações</a>
+        <span class="usuario" id="nome-usuario"></span>
+        <a href="login.html" class="botao-sair">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Mapa de pontos de coleta</h1>
+      <p class="subtitulo">Escolha uma entidade na tabela para ver onde ela fica e levar sua doação.</p>
+      <form class="filtros" method="get" action="doador-mapa.html">
+        <label for="filtro-cidade" class="oculto-visual">Cidade</label>
+        <select id="filtro-cidade" name="cidade">
+          <option value="">Todas as cidades</option>
+    <option value="Aracruz">Aracruz</option>
+    <option value="Cachoeiro de Itapemirim">Cachoeiro de Itapemirim</option>
+    <option value="Cariacica">Cariacica</option>
+    <option value="Colatina">Colatina</option>
+    <option value="Guarapari">Guarapari</option>
+    <option value="Linhares">Linhares</option>
+    <option value="São Mateus">São Mateus</option>
+    <option value="Serra">Serra</option>
+    <option value="Vila Velha">Vila Velha</option>
+    <option value="Vitória">Vitória</option>
+        </select>
+        <button type="submit" class="botao">Filtrar</button>
+      </form>
+      <div class="layout-duplo">
+        <div class="tabela-caixa">
+          <table>
+            <thead>
+              <tr>
+                <th>Entidade</th>
+                <th>Endereço e horário</th>
+                <th>Mapa</th>
+              </tr>
+            </thead>
+            <tbody id="lista-pontos"></tbody>
+          </table>
+        </div>
+        <iframe name="mapa" id="mapa" class="mapa mapa-grande" title="Mapa do ponto de coleta escolhido"></iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>DoeUVV © 2026 - Desafio Interdisciplinar UVV</p>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/doador-mapa.js"></script>
+</body>
+</html>

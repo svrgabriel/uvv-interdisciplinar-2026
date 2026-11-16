@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
+  <title>Necessidades | DoeUVV</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      <input type="checkbox" id="abrir-menu" class="menu-check">
+      <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
+      <nav class="menu" aria-label="Menu principal">
+        <a href="entidade-necessidades.html" class="ativo">Necessidades</a>
+        <a href="entidade-campanhas.html">Campanhas</a>
+        <a href="entidade-recebimentos.html">Recebimentos</a>
+        <a href="entidade-perfil.html">Perfil</a>
+        <span class="usuario" id="nome-usuario"></span>
+        <a href="login.html" class="botao-sair">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Necessidades da entidade</h1>
+      <p class="subtitulo">Cadastre, edite e remova os itens que sua entidade está precisando. Limite de 50 itens.</p>
+      <div class="layout-duplo">
+        <form id="form-necessidade" class="formulario">
+          <h2 id="titulo-form">Nova necessidade</h2>
+          <input type="hidden" id="id-necessidade">
+          <div class="campo">
+            <label for="item">Item</label>
+            <input type="text" id="item" placeholder="Ex.: Leite em pó" minlength="2" maxlength="60" pattern=".*\S.*" title="Digite o nome do item" required>
+          </div>
+          <div class="campo">
+            <label for="prioridade">Prioridade</label>
+            <select id="prioridade" required>
+              <option value="normal">Normal</option>
+              <option value="alta">Alta</option>
+              <option value="urgente">Urgente</option>
+            </select>
+          </div>
+          <p id="mensagem-necessidade" class="mensagem mensagem-erro" role="alert"></p>
+          <div class="cartao-botoes">
+            <button type="submit" class="botao">Salvar</button>
+            <a href="entidade-necessidades.html" class="botao botao-contorno">Cancelar</a>
+          </div>
+        </form>
+        <div>
+          <h2>Necessidades publicadas (<span id="contador">0</span>/50)</h2>
+          <div class="tabela-caixa">
+            <table>
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Prioridade</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tabela-necessidades"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>DoeUVV © 2026 - Desafio Interdisciplinar UVV</p>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/entidade-necessidades.js"></script>
+</body>
+</html>
