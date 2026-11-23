@@ -22,7 +22,7 @@ Abra o arquivo `index.html` no navegador ou acesse a versão publicada no GitHub
 Públicas
 - `index.html` - apresentação da plataforma, como funciona, campanhas e entidades em destaque
 - `login.html` - login
-- `cadastro.html` - cadastro de nova entidade
+- `cadastro.html` - cadastro de doador, Defesa Civil ou entidade (o tipo é escolhido no próprio formulário)
 - `instituicao.html` - página pública da entidade com mapa
 
 Doador
@@ -43,7 +43,7 @@ Defesa Civil
 - `dc-pontos.html` - pontos de coleta por região
 
 Administrador
-- `admin-aprovacoes.html` - aprovação de entidades
+- `admin-aprovacoes.html` - aprovação de entidades e de cadastros da Defesa Civil
 - `admin-moderacao.html` - moderação de campanhas
 - `admin-relatorios.html` - relatórios
 

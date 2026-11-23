@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
-  <title>Cadastrar entidade | DoeUVV</title>
+  <title>Cadastro | DoeUVV</title>
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/estilo.css">
 </head>
@@ -17,7 +17,7 @@
       <nav class="menu" aria-label="Menu principal">
         <a href="index.html">Início</a>
         <a href="index.html#como-funciona">Como funciona</a>
-        <a href="cadastro.html" class="ativo">Cadastrar entidade</a>
+        <a href="cadastro.html" class="ativo">Cadastrar</a>
         <a href="login.html" class="botao botao-pequeno">Entrar</a>
       </nav>
     </div>
@@ -25,9 +25,123 @@
 
   <main class="container">
     <section>
-      <h1>Cadastrar entidade</h1>
-      <p class="subtitulo">Preencha os dados da sua instituição. O cadastro será analisado pelo administrador antes de aparecer no site.</p>
-      <form id="form-cadastro" class="formulario">
+      <h1>Criar cadastro</h1>
+      <p class="subtitulo">Escolha o tipo de usuário e preencha os dados. Doadores já podem entrar na hora. Entidades e Defesa Civil passam pela aprovação do administrador.</p>
+      <div class="tipos-cadastro">
+      <p class="tipos-titulo">Tipo de usuário</p>
+      <input type="radio" name="tipo" id="tipo-doador" class="tipo-check" checked>
+      <label for="tipo-doador" class="tipo-opcao">Doador</label>
+      <input type="radio" name="tipo" id="tipo-dc" class="tipo-check">
+      <label for="tipo-dc" class="tipo-opcao">Defesa Civil</label>
+      <input type="radio" name="tipo" id="tipo-entidade" class="tipo-check">
+      <label for="tipo-entidade" class="tipo-opcao">Entidade</label>
+      <form id="form-doador" class="formulario form-tipo">
+        <h2>Dados do doador</h2>
+        <div class="campos-linha">
+          <div class="campo">
+            <label for="doador-nome">Nome completo</label>
+            <input type="text" id="doador-nome" placeholder="Ex.: João da Silva" minlength="3" maxlength="60" pattern=".*\S.*" required>
+          </div>
+          <div class="campo">
+            <label for="doador-cidade">Cidade</label>
+            <select id="doador-cidade" required>
+              <option value="">Selecione</option>
+    <option value="Aracruz">Aracruz</option>
+    <option value="Cachoeiro de Itapemirim">Cachoeiro de Itapemirim</option>
+    <option value="Cariacica">Cariacica</option>
+    <option value="Colatina">Colatina</option>
+    <option value="Guarapari">Guarapari</option>
+    <option value="Linhares">Linhares</option>
+    <option value="São Mateus">São Mateus</option>
+    <option value="Serra">Serra</option>
+    <option value="Vila Velha">Vila Velha</option>
+    <option value="Vitória">Vitória</option>
+            </select>
+          </div>
+        </div>
+        <div class="campo">
+          <label for="doador-email">E-mail</label>
+          <input type="email" id="doador-email" placeholder="Ex.: joao@email.com" maxlength="60" required>
+        </div>
+        <h2>Acesso</h2>
+        <div class="campos-linha">
+          <div class="campo">
+            <label for="doador-usuario">Usuário</label>
+            <input type="text" id="doador-usuario" placeholder="Ex.: joao.silva" pattern="[a-z0-9._\-]{3,20}" title="De 3 a 20 letras minúsculas, números, ponto, hífen ou sublinhado, sem espaços" autocomplete="username" required>
+          </div>
+          <div class="campo">
+            <label for="doador-senha">Senha</label>
+            <input type="password" id="doador-senha" minlength="6" maxlength="30" autocomplete="new-password" required>
+          </div>
+          <div class="campo">
+            <label for="doador-confirmar">Confirmar senha</label>
+            <input type="password" id="doador-confirmar" minlength="6" maxlength="30" autocomplete="new-password" required>
+          </div>
+        </div>
+        <p id="doador-mensagem" class="mensagem mensagem-erro" role="alert"></p>
+        <div class="cartao-botoes">
+          <button type="submit" class="botao">Criar cadastro de doador</button>
+          <button type="reset" class="botao botao-contorno">Limpar</button>
+        </div>
+      </form>
+      <form id="form-dc" class="formulario form-tipo">
+        <h2>Dados da Defesa Civil</h2>
+        <div class="campos-linha">
+          <div class="campo">
+            <label for="dc-nome">Nome do órgão</label>
+            <input type="text" id="dc-nome" placeholder="Ex.: Defesa Civil de Vila Velha" minlength="3" maxlength="60" pattern=".*\S.*" required>
+          </div>
+          <div class="campo">
+            <label for="dc-cidade">Município</label>
+            <select id="dc-cidade" required>
+              <option value="">Selecione</option>
+    <option value="Aracruz">Aracruz</option>
+    <option value="Cachoeiro de Itapemirim">Cachoeiro de Itapemirim</option>
+    <option value="Cariacica">Cariacica</option>
+    <option value="Colatina">Colatina</option>
+    <option value="Guarapari">Guarapari</option>
+    <option value="Linhares">Linhares</option>
+    <option value="São Mateus">São Mateus</option>
+    <option value="Serra">Serra</option>
+    <option value="Vila Velha">Vila Velha</option>
+    <option value="Vitória">Vitória</option>
+            </select>
+          </div>
+        </div>
+        <div class="campos-linha">
+          <div class="campo">
+            <label for="dc-responsavel">Nome do responsável</label>
+            <input type="text" id="dc-responsavel" minlength="3" maxlength="60" pattern=".*\S.*" required>
+          </div>
+          <div class="campo">
+            <label for="dc-telefone">Telefone</label>
+            <input type="tel" id="dc-telefone" placeholder="(27) 99999-9999" pattern="\(?[0-9]{2}\)? ?[0-9]{4,5}-?[0-9]{4}" title="Digite o telefone com DDD, ex.: (27) 99999-9999" required>
+          </div>
+        </div>
+        <h2>Acesso</h2>
+        <div class="campos-linha">
+          <div class="campo">
+            <label for="dc-usuario">Usuário</label>
+            <input type="text" id="dc-usuario" placeholder="Ex.: joao.silva" pattern="[a-z0-9._\-]{3,20}" title="De 3 a 20 letras minúsculas, números, ponto, hífen ou sublinhado, sem espaços" autocomplete="username" required>
+          </div>
+          <div class="campo">
+            <label for="dc-senha">Senha</label>
+            <input type="password" id="dc-senha" minlength="6" maxlength="30" autocomplete="new-password" required>
+          </div>
+          <div class="campo">
+            <label for="dc-confirmar">Confirmar senha</label>
+            <input type="password" id="dc-confirmar" minlength="6" maxlength="30" autocomplete="new-password" required>
+          </div>
+        </div>
+        <p id="dc-mensagem" class="mensagem mensagem-erro" role="alert"></p>
+        <p class="texto-suave">O cadastro da Defesa Civil é liberado depois da aprovação do administrador.</p>
+        <div class="cartao-botoes">
+          <button type="submit" class="botao">Enviar cadastro da Defesa Civil</button>
+          <button type="reset" class="botao botao-contorno">Limpar</button>
+        </div>
+      </form>
+      <form id="form-entidade" class="formulario form-tipo">
+        <h2>Dados da entidade</h2>
         <div class="campos-linha">
           <div class="campo">
             <label for="nome">Nome da entidade</label>
@@ -88,11 +202,28 @@
           <label for="historia">Nossa história</label>
           <textarea id="historia" placeholder="Conte quem vocês são e quem vocês ajudam" maxlength="600" required></textarea>
         </div>
+        <h2>Acesso</h2>
+        <div class="campos-linha">
+          <div class="campo">
+            <label for="ent-usuario">Usuário</label>
+            <input type="text" id="ent-usuario" placeholder="Ex.: joao.silva" pattern="[a-z0-9._\-]{3,20}" title="De 3 a 20 letras minúsculas, números, ponto, hífen ou sublinhado, sem espaços" autocomplete="username" required>
+          </div>
+          <div class="campo">
+            <label for="ent-senha">Senha</label>
+            <input type="password" id="ent-senha" minlength="6" maxlength="30" autocomplete="new-password" required>
+          </div>
+          <div class="campo">
+            <label for="ent-confirmar">Confirmar senha</label>
+            <input type="password" id="ent-confirmar" minlength="6" maxlength="30" autocomplete="new-password" required>
+          </div>
+        </div>
+        <p id="ent-mensagem" class="mensagem mensagem-erro" role="alert"></p>
         <div class="cartao-botoes">
           <button type="submit" class="botao">Enviar cadastro</button>
           <button type="reset" class="botao botao-contorno">Limpar</button>
         </div>
       </form>
+      </div>
     </section>
   </main>
 

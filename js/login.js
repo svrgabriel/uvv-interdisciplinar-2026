@@ -8,15 +8,23 @@ formLogin.addEventListener("submit", function (evento) {
   const senha = document.getElementById("senha").value;
   const mensagem = document.getElementById("mensagem-login");
 
-  let encontrado = null;
-  for (let i = 0; i < usuarios.length; i++) {
-    if (usuarios[i].usuario === usuario && usuarios[i].senha === senha) {
-      encontrado = usuarios[i];
-    }
+  const encontrado = buscarUsuario(usuario);
+  if (encontrado === null || encontrado.senha !== senha) {
+    mensagem.textContent = "Usuário ou senha inválidos.";
+    return;
   }
 
-  if (encontrado === null) {
-    mensagem.textContent = "Usuário ou senha inválidos.";
+  let status = encontrado.status;
+  if (encontrado.perfil === "entidade") {
+    const entidade = buscarPorId(pegarEntidades(), encontrado.entidadeId);
+    status = entidade === null ? "recusada" : entidade.status;
+  }
+  if (status === "pendente") {
+    mensagem.textContent = "Seu cadastro ainda está aguardando a aprovação do administrador.";
+    return;
+  }
+  if (status === "recusada" || status === "suspensa") {
+    mensagem.textContent = "Seu cadastro não está liberado. Fale com o administrador.";
     return;
   }
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
-  <title>Aprovar entidades | DoeUVV</title>
+  <title>Aprovar cadastros | DoeUVV</title>
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/estilo.css">
 </head>
@@ -15,7 +15,7 @@
       <input type="checkbox" id="abrir-menu" class="menu-check">
       <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
       <nav class="menu" aria-label="Menu principal">
-        <a href="admin-aprovacoes.html" class="ativo">Aprovar entidades</a>
+        <a href="admin-aprovacoes.html" class="ativo">Aprovar cadastros</a>
         <a href="admin-moderacao.html">Moderar campanhas</a>
         <a href="admin-relatorios.html">Relatórios</a>
         <span class="usuario" id="nome-usuario"></span>
@@ -26,9 +26,9 @@
 
   <main class="container">
     <section>
-      <h1>Aprovar entidades</h1>
-      <p class="subtitulo">Confira os cadastros novos antes de liberar a entidade no site.</p>
-      <h2>Aguardando aprovação</h2>
+      <h1>Aprovar cadastros</h1>
+      <p class="subtitulo">Confira os cadastros novos de entidades e da Defesa Civil antes de liberar o acesso.</p>
+      <h2>Entidades aguardando aprovação</h2>
       <div class="tabela-caixa">
         <table>
           <thead>
@@ -59,6 +59,24 @@
             </tr>
           </thead>
           <tbody id="tabela-entidades"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="secao">
+      <h2>Cadastros da Defesa Civil</h2>
+      <div class="tabela-caixa">
+        <table>
+          <thead>
+            <tr>
+              <th>Órgão</th>
+              <th>Responsável</th>
+              <th>Usuário</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-dc"></tbody>
         </table>
       </div>
     </section>
