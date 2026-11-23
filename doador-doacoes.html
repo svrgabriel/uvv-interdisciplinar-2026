@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
+  <title>Minhas doações | DoeUVV</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      <input type="checkbox" id="abrir-menu" class="menu-check">
+      <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
+      <nav class="menu" aria-label="Menu principal">
+        <a href="doador-buscar.html">O que doar</a>
+        <a href="doador-mapa.html">Mapa de coleta</a>
+        <a href="doador-doar.html">Registrar doação</a>
+        <a href="doador-doacoes.html" class="ativo">Minhas doações</a>
+        <span class="usuario" id="nome-usuario"></span>
+        <a href="login.html" class="botao-sair">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Minhas doações</h1>
+      <p class="subtitulo">Acompanhe suas intenções de doação e veja quando a entidade confirmar o recebimento.</p>
+      <div class="tabela-caixa">
+        <table>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Entidade</th>
+              <th>Item</th>
+              <th>Quantidade</th>
+              <th>Entrega</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-doacoes"></tbody>
+        </table>
+      </div>
+      <p class="secao"><a href="doador-doar.html" class="botao">Registrar nova doação</a></p>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>DoeUVV © 2026 - Desafio Interdisciplinar UVV</p>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/doador-doacoes.js"></script>
+</body>
+</html>

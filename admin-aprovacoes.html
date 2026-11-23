@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
+  <title>Aprovar entidades | DoeUVV</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      <input type="checkbox" id="abrir-menu" class="menu-check">
+      <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
+      <nav class="menu" aria-label="Menu principal">
+        <a href="admin-aprovacoes.html" class="ativo">Aprovar entidades</a>
+        <a href="admin-moderacao.html">Moderar campanhas</a>
+        <a href="admin-relatorios.html">Relatórios</a>
+        <span class="usuario" id="nome-usuario"></span>
+        <a href="login.html" class="botao-sair">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Aprovar entidades</h1>
+      <p class="subtitulo">Confira os cadastros novos antes de liberar a entidade no site.</p>
+      <h2>Aguardando aprovação</h2>
+      <div class="tabela-caixa">
+        <table>
+          <thead>
+            <tr>
+              <th>Entidade</th>
+              <th>Endereço</th>
+              <th>Chave Pix</th>
+              <th>História</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-pendentes"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="secao">
+      <h2>Todas as entidades</h2>
+      <div class="tabela-caixa">
+        <table>
+          <thead>
+            <tr>
+              <th>Entidade</th>
+              <th>Causa</th>
+              <th>Cidade</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-entidades"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>DoeUVV © 2026 - Desafio Interdisciplinar UVV</p>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/admin-aprovacoes.js"></script>
+</body>
+</html>

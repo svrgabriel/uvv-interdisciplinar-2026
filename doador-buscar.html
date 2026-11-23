@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
+  <title>O que doar agora | DoeUVV</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      <input type="checkbox" id="abrir-menu" class="menu-check">
+      <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
+      <nav class="menu" aria-label="Menu principal">
+        <a href="doador-buscar.html" class="ativo">O que doar</a>
+        <a href="doador-mapa.html">Mapa de coleta</a>
+        <a href="doador-doar.html">Registrar doação</a>
+        <a href="doador-doacoes.html">Minhas doações</a>
+        <span class="usuario" id="nome-usuario"></span>
+        <a href="login.html" class="botao-sair">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>O que doar agora</h1>
+      <p class="subtitulo">Pesquise o que você quer doar e veja as entidades e campanhas que mais precisam.</p>
+      <form class="filtros" method="get" action="doador-buscar.html">
+        <label for="busca-item" class="oculto-visual">Item</label>
+        <input type="search" id="busca-item" name="item" placeholder="Ex.: fraldas, arroz, ração">
+        <label for="busca-cidade" class="oculto-visual">Cidade</label>
+        <select id="busca-cidade" name="cidade">
+          <option value="">Todas as cidades</option>
+    <option value="Aracruz">Aracruz</option>
+    <option value="Cachoeiro de Itapemirim">Cachoeiro de Itapemirim</option>
+    <option value="Cariacica">Cariacica</option>
+    <option value="Colatina">Colatina</option>
+    <option value="Guarapari">Guarapari</option>
+    <option value="Linhares">Linhares</option>
+    <option value="São Mateus">São Mateus</option>
+    <option value="Serra">Serra</option>
+    <option value="Vila Velha">Vila Velha</option>
+    <option value="Vitória">Vitória</option>
+        </select>
+        <label for="busca-causa" class="oculto-visual">Causa</label>
+        <select id="busca-causa" name="causa">
+          <option value="">Todas as causas</option>
+    <option value="Abrigo infantil">Abrigo infantil</option>
+    <option value="Acolhimento de desabrigados">Acolhimento de desabrigados</option>
+    <option value="Acolhimento de idosos">Acolhimento de idosos</option>
+    <option value="Apoio a famílias">Apoio a famílias</option>
+    <option value="Geração de renda">Geração de renda</option>
+    <option value="Proteção animal">Proteção animal</option>
+    <option value="Segurança alimentar">Segurança alimentar</option>
+    <option value="Outra">Outra</option>
+        </select>
+        <button type="submit" class="botao">Buscar</button>
+        <a href="doador-buscar.html" class="botao botao-contorno">Limpar</a>
+      </form>
+    </section>
+
+    <section class="secao">
+      <h2>Campanhas</h2>
+      <div id="resultado-campanhas" class="grade"></div>
+    </section>
+
+    <section class="secao">
+      <h2>Entidades</h2>
+      <div class="tabela-caixa">
+        <table>
+          <thead>
+            <tr>
+              <th>Entidade</th>
+              <th>Cidade</th>
+              <th>Precisa de</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="resultado-entidades"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>DoeUVV © 2026 - Desafio Interdisciplinar UVV</p>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/doador-buscar.js"></script>
+</body>
+</html>

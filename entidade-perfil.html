@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DoeUVV conecta doadores a entidades e campanhas que precisam de doações.">
+  <title>Perfil da entidade | DoeUVV</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <a href="index.html" class="logo"><span aria-hidden="true">❤️</span> DoeUVV</a>
+      <input type="checkbox" id="abrir-menu" class="menu-check">
+      <label for="abrir-menu" class="botao-menu"><span aria-hidden="true">☰</span><span class="oculto-visual">Abrir menu</span></label>
+      <nav class="menu" aria-label="Menu principal">
+        <a href="entidade-necessidades.html">Necessidades</a>
+        <a href="entidade-campanhas.html">Campanhas</a>
+        <a href="entidade-recebimentos.html">Recebimentos</a>
+        <a href="entidade-perfil.html" class="ativo">Perfil</a>
+        <span class="usuario" id="nome-usuario"></span>
+        <a href="login.html" class="botao-sair">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>Perfil da entidade</h1>
+      <p class="subtitulo">Essas informações aparecem na <a id="link-publico" href="index.html" class="mensagem-sucesso">página pública</a> da sua entidade.</p>
+      <form id="form-perfil" class="formulario">
+        <div class="campos-linha">
+          <div class="campo">
+            <label for="nome">Nome da entidade</label>
+            <input type="text" id="nome" minlength="3" maxlength="60" required>
+          </div>
+          <div class="campo">
+            <label for="causa">Causa</label>
+            <select id="causa" required>
+    <option value="Abrigo infantil">Abrigo infantil</option>
+    <option value="Acolhimento de desabrigados">Acolhimento de desabrigados</option>
+    <option value="Acolhimento de idosos">Acolhimento de idosos</option>
+    <option value="Apoio a famílias">Apoio a famílias</option>
+    <option value="Geração de renda">Geração de renda</option>
+    <option value="Proteção animal">Proteção animal</option>
+    <option value="Segurança alimentar">Segurança alimentar</option>
+    <option value="Outra">Outra</option>
+            </select>
+          </div>
+        </div>
+        <div class="campos-linha">
+          <div class="campo">
+            <label for="cidade">Cidade</label>
+            <select id="cidade" required>
+    <option value="Aracruz">Aracruz</option>
+    <option value="Cachoeiro de Itapemirim">Cachoeiro de Itapemirim</option>
+    <option value="Cariacica">Cariacica</option>
+    <option value="Colatina">Colatina</option>
+    <option value="Guarapari">Guarapari</option>
+    <option value="Linhares">Linhares</option>
+    <option value="São Mateus">São Mateus</option>
+    <option value="Serra">Serra</option>
+    <option value="Vila Velha">Vila Velha</option>
+    <option value="Vitória">Vitória</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="cep">CEP</label>
+            <input type="text" id="cep" pattern="[0-9]{5}-?[0-9]{3}" title="Digite o CEP no formato 00000-000" required>
+          </div>
+        </div>
+        <div class="campo">
+          <label for="endereco">Endereço</label>
+          <input type="text" id="endereco" required>
+        </div>
+        <div class="campos-linha">
+          <div class="campo">
+            <label for="horario">Dias e horário de entrega</label>
+            <input type="text" id="horario" required>
+          </div>
+          <div class="campo">
+            <label for="pix">Chave Pix (opcional)</label>
+            <input type="text" id="pix">
+          </div>
+        </div>
+        <div class="campo">
+          <label for="foto">Endereço da foto</label>
+          <input type="text" id="foto" required>
+        </div>
+        <div class="campo">
+          <label for="historia">Nossa história</label>
+          <textarea id="historia" maxlength="600" required></textarea>
+        </div>
+        <p id="mensagem-perfil" class="mensagem mensagem-sucesso" role="status"></p>
+        <div class="cartao-botoes">
+          <button type="submit" class="botao">Salvar perfil</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>DoeUVV © 2026 - Desafio Interdisciplinar UVV</p>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/entidade-perfil.js"></script>
+</body>
+</html>
