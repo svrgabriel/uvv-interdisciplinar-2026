@@ -444,6 +444,7 @@ a.cartao-titulo:hover {
 .selo-nivel-baixo,
 .selo-status-aprovada,
 .selo-status-ativa,
+.selo-status-ativo,
 .selo-status-recebida {
   background-color: var(--verde-claro);
   color: var(--verde);
@@ -479,6 +480,48 @@ a.cartao-titulo:hover {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.tipos-titulo {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.tipo-check {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.tipo-opcao {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0 8px 16px 0;
+  border: 2px solid var(--verde);
+  border-radius: 999px;
+  color: var(--verde);
+  cursor: pointer;
+}
+
+.tipo-check:checked + .tipo-opcao {
+  background-color: var(--verde);
+  color: #ffffff;
+}
+
+.tipo-check:focus-visible + .tipo-opcao {
+  outline: 2px solid var(--texto);
+  outline-offset: 2px;
+}
+
+.form-tipo {
+  display: none;
+}
+
+#tipo-doador:checked ~ #form-doador,
+#tipo-dc:checked ~ #form-dc,
+#tipo-entidade:checked ~ #form-entidade {
+  display: flex;
 }
 
 .formulario-estreito {

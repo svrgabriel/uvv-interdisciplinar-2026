@@ -1,8 +1,8 @@
-const usuarios = [
-  { usuario: "doador", senha: "doa#2026", perfil: "doador", nome: "Maria Doadora", inicio: "doador-buscar.html", entidadeId: 0 },
-  { usuario: "entidade", senha: "ent!2026", perfil: "entidade", nome: "Casa do Caminho", inicio: "entidade-necessidades.html", entidadeId: 1 },
-  { usuario: "defesacivil", senha: "dc$-2026", perfil: "defesacivil", nome: "Defesa Civil ES", inicio: "dc-painel.html", entidadeId: 0 },
-  { usuario: "admin", senha: "adm@2026", perfil: "admin", nome: "Administrador", inicio: "admin-aprovacoes.html", entidadeId: 0 }
+const usuariosIniciais = [
+  { usuario: "doador", senha: "doa#2026", perfil: "doador", nome: "Maria Doadora", inicio: "doador-buscar.html", entidadeId: 0, status: "ativo" },
+  { usuario: "entidade", senha: "ent!2026", perfil: "entidade", nome: "Casa do Caminho", inicio: "entidade-necessidades.html", entidadeId: 1, status: "ativo" },
+  { usuario: "defesacivil", senha: "dc$-2026", perfil: "defesacivil", nome: "Defesa Civil ES", inicio: "dc-painel.html", entidadeId: 0, status: "ativo" },
+  { usuario: "admin", senha: "adm@2026", perfil: "admin", nome: "Administrador", inicio: "admin-aprovacoes.html", entidadeId: 0, status: "ativo" }
 ];
 
 const entidadesIniciais = [
@@ -203,6 +203,7 @@ const nomesStatus = {
   recusada: "Recusada",
   suspensa: "Suspensa",
   ativa: "Ativa",
+  ativo: "Ativo",
   encerrada: "Encerrada",
   aguardando: "Aguardando entrega",
   recebida: "Recebida",
@@ -220,6 +221,20 @@ function carregar(chave, listaInicial) {
 
 function salvar(chave, lista) {
   localStorage.setItem(chave, JSON.stringify(lista));
+}
+
+function pegarUsuarios() {
+  return carregar("usuarios", usuariosIniciais);
+}
+
+function buscarUsuario(nomeUsuario) {
+  const lista = pegarUsuarios();
+  for (let i = 0; i < lista.length; i++) {
+    if (lista[i].usuario === nomeUsuario) {
+      return lista[i];
+    }
+  }
+  return null;
 }
 
 function pegarEntidades() {

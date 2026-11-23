@@ -45,6 +45,44 @@ for (let i = 0; i < entidades.length; i++) {
   `;
 }
 
+function mudarStatusUsuario(nomeUsuario, status) {
+  const lista = pegarUsuarios();
+  for (let i = 0; i < lista.length; i++) {
+    if (lista[i].usuario === nomeUsuario) {
+      lista[i].status = status;
+    }
+  }
+  salvar("usuarios", lista);
+  location.reload();
+}
+
+const tabelaDc = document.getElementById("tabela-dc");
+const contas = pegarUsuarios();
+for (let i = 0; i < contas.length; i++) {
+  const conta = contas[i];
+  if (conta.perfil !== "defesacivil") {
+    continue;
+  }
+  let botoes = `<button class="botao botao-perigo botao-pequeno" onclick="mudarStatusUsuario('${conta.usuario}', 'suspensa')">Suspender</button>`;
+  if (conta.status === "pendente") {
+    botoes = `
+      <button class="botao botao-pequeno" onclick="mudarStatusUsuario('${conta.usuario}', 'ativo')">Aprovar</button>
+      <button class="botao botao-perigo botao-pequeno" onclick="mudarStatusUsuario('${conta.usuario}', 'recusada')">Recusar</button>
+    `;
+  } else if (conta.status !== "ativo") {
+    botoes = `<button class="botao botao-pequeno" onclick="mudarStatusUsuario('${conta.usuario}', 'ativo')">Aprovar</button>`;
+  }
+  tabelaDc.innerHTML += `
+    <tr>
+      <td><strong>${conta.nome}</strong><br><span class="texto-suave">${conta.cidade || "Espírito Santo"}</span></td>
+      <td>${conta.responsavel || "-"}<br><span class="texto-suave">${conta.telefone || ""}</span></td>
+      <td>${conta.usuario}</td>
+      <td>${seloStatus(conta.status)}</td>
+      <td><div class="acoes">${botoes}</div></td>
+    </tr>
+  `;
+}
+
 if (pendentes.innerHTML === "") {
   pendentes.innerHTML = '<tr><td colspan="5" class="vazio">Nenhum cadastro aguardando aprovação.</td></tr>';
 }
