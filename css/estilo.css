@@ -656,6 +656,21 @@ tbody tr:last-child td {
   margin-top: 12px;
 }
 
+.copiar {
+  font-family: monospace;
+  font-size: 14px;
+  padding: 4px 8px;
+  border: 1px dashed var(--verde);
+  border-radius: 6px;
+  background-color: var(--verde-claro);
+  color: var(--texto);
+  cursor: copy;
+}
+
+.copiar:hover {
+  border-style: solid;
+}
+
 .acoes {
   display: flex;
   gap: 8px;

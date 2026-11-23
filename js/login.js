@@ -30,3 +30,18 @@ formLogin.addEventListener("submit", function (evento) {
   localStorage.setItem("usuarioLogado", JSON.stringify(sessao));
   window.location.href = encontrado.inicio;
 });
+
+const botoesCopiar = document.querySelectorAll(".copiar");
+
+for (let i = 0; i < botoesCopiar.length; i++) {
+  botoesCopiar[i].addEventListener("click", function () {
+    const botao = botoesCopiar[i];
+    const texto = botao.dataset.texto;
+    navigator.clipboard.writeText(texto).then(function () {
+      botao.textContent = "Copiado!";
+      setTimeout(function () {
+        botao.textContent = texto;
+      }, 1500);
+    });
+  });
+}
